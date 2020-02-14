@@ -35,9 +35,13 @@ $heading-color: $brand-color-1;
 $black: #000000;
 $white: #ffffff;
 
+// color for bootstrap
+$primary: #3fabf3;
+$danger: #ff5851;
+$light: #e8f6ff;
+$dark:  #3d4461;
 
 // override bootstrap
-$link-color: $brand-color-1;
 
 
 // grid
@@ -66,16 +70,27 @@ $container-max-widths: (
 $btn-border-width: 2px;
 
 $theme-colors: (
-    "primary":    #3fabf3,
+    "primary":    $primary,
     // "secondary":  $secondary,
     // "success":    $success,
     // "info":       $info,
     // "warning":    $warning,
-    "danger":     #ff5851,
-    // "light":      $light,
-    "dark":       #3d4461
+    "danger":     $danger,
+    "light":      $light,
+    "dark":       $dark
 );
 
 
+$link-color: $dark;
+$headings-color: $dark;
 $headings-font-family: $main-font;
 $font-weight-bold: 600;
+
+$font-size-base:  1rem;
+
+$h1-font-size:    $font-size-base * 3.5;
+$h2-font-size:    $font-size-base * 3;
+$h3-font-size:    $font-size-base * 2.5;
+$h4-font-size:    $font-size-base * 2;
+$h5-font-size:    $font-size-base * 1.5;
+$h6-font-size:    $font-size-base;

@@ -5,7 +5,9 @@ export const referrer = {
     ambassadorUrl: null,
     referralUrlId: null
 };
+export const specialities = [];
 export default {
     user,
-    referrer
+    referrer,
+    specialities
 }
