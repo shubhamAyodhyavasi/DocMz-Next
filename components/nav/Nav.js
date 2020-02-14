@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import Link from 'next/link'
 const Nav = ({items, isSubNav}) =>{
     return (
-        <ul className={classNames("c-nav row align-items-center my-auto p-0", {
+        <ul className={classNames("c-nav row align-items-center my-auto px-3", {
             "c-nav--sub-nav": isSubNav
         })}>
             {
