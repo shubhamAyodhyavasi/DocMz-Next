@@ -26,6 +26,9 @@ export const BOTTOM_CONTENT_3   = "A dipisicing elit sed dotem eiusmou tempor in
 export const APP_STORE_LINK     = "#"
 export const PLAY_STORE_LINK    = "#"
 
+// copy right 
+export const COPY_RIGHT_TEXT    = "Copyrights © 2019 by DocMz. All Rights Reserved."
+
 // bottom section 2 site links
 export const SITE_LINKS         = [
     {
