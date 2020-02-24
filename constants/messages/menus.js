@@ -8,12 +8,16 @@ export const mainMenus = [
         link: "/"
     },
     {
-        name: "service",
+        name: "Service",
         link: "/"
     },
     {
-        name: "login",
-        link: "/",
+        name: "Join",
+        link: "/register"
+    },
+    {
+        name: "Login",
+        link: "/login",
         extraClass: "has-btn",
         extraLinkClass: "btn btn-outline-primary",
     },
@@ -27,7 +31,7 @@ export const rightMenus = [
         name: "Sign up",
         link: "/",
         extraClass: "",
-        extraLinkClass: "btn btn-light",
+        extraLinkClass: "btn btn-secondary",
         // subMenus: [
         //     {
         //         name: "test",

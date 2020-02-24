@@ -8,7 +8,7 @@ const HowItworks = ({
 }) => {
     return (
         <div className="c-how-it-works">
-            <div className=" bg-light w-100 c-how-it-works__top-container">
+            <div className=" bg-secondary w-100 c-how-it-works__top-container">
                 <div className="container text-center">
                     <div className="content pt-5 pb-4">
                     <p className="mb-0" >{preTitle}</p>

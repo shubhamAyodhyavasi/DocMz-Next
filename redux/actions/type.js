@@ -7,3 +7,6 @@ export const SET_REFERRER = "SET_REFERRER";
 
 // specialities
 export const SET_SPECIALITIES = "SET_SPECIALITIES";
+
+// doctors
+export const SET_DOCTORS = "SET_DOCTORS"

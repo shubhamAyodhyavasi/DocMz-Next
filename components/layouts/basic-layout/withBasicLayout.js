@@ -10,8 +10,35 @@ import Footer from '../../footer/Footer';
 
 const withBasicLayout = (PassedComponent) => {
     return class extends React.Component {
+        static getInitialProps = async ctx => {
+            // const response = await ctx.apolloClient.query({ query: ME });
+
+            // console.log("@withAuth ", response);
+
+            // if (!response || !response.data || !response.data.me) {
+            //   redirect(ctx, "/");
+            //   return {
+            //     me: null
+            //   };
+            // }
+
+            // Get component’s props
+            let componentProps = {}
+            if (PassedComponent.getInitialProps) {
+                componentProps = await PassedComponent.getInitialProps(ctx);
+            }
+
+            return {
+                ...componentProps
+            };
+        }
         componentDidMount(){
-            this.props.getSpecialities()
+            this.props.getSpecialities();
+            console.log({
+                getInitialProps : PassedComponent.getInitialProps,
+                PassedComponent,
+                props: this.props
+            })
         }
         render(){
             const {

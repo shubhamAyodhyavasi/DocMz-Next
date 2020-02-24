@@ -7,20 +7,8 @@ import SimpleSlideCard from '../components/sliders/slides/simple-slide-card/Simp
 import { ReactSVG } from 'react-svg'
 import HowItworks from '../components/how-it-works/HowItworks'
 
-
-const colorArr = [
-  'primary',
-  'secondary',
-  'success',
-  'info',
-  'warning',
-  'danger',
-  'light',
-  'dark',
-]
-
 const Home = () => (
-  <div>
+  <div className="c-home">
     <BannerType1 
       image={BANNER_IMAGE} 
       title={
@@ -53,7 +41,7 @@ const Home = () => (
     </HowItworks>
     <div className="container-fluid pt-5">
       <div className="row">
-        <div className="col-md-3 bg-light d-flex flex-column justify-content-center align-items-center">
+        <div className="col-md-3 bg-secondary d-flex flex-column justify-content-center align-items-center">
           <h2 className="text-dark display-4 font-weight-bold">{SPECIALITIES_TEXT_1}</h2>
           <h2 className="text-danger display-4 font-weight-bold">{SPECIALITIES_TEXT_2}</h2>
           <div className="pt-2">

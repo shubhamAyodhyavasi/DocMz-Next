@@ -7,6 +7,10 @@ $base-font-size: 14px;
 $font-size-xxl: 20px;
 $header-height: 124px;
 
+$bannerHeight: 300px;
+$bannerHeightMd: 600px;
+$bannerHeightLg: 1000px;
+
 $g-bp-xxs: 375px;
 $g-bp-xs: 544px;
 $g-bp-sm: 768px;
@@ -28,7 +32,7 @@ $brand-color-3: #00e6af;
 $brand-color-4: #d1a3fb;
 
 // text color
-$text-base: #c2c2c2;
+$text-base: #767676;
 $heading-color: $brand-color-1;
 
 // basic color
@@ -38,8 +42,10 @@ $white: #ffffff;
 // color for bootstrap
 $primary: #3fabf3;
 $danger: #ff5851;
-$light: #e8f6ff;
+$secondary: #e8f6ff;
+$light: #f7f7f7;
 $dark:  #3d4461;
+$success:  #00cc8d;
 
 // override bootstrap
 
@@ -71,8 +77,8 @@ $btn-border-width: 2px;
 
 $theme-colors: (
     "primary":    $primary,
-    // "secondary":  $secondary,
-    // "success":    $success,
+    "secondary":  $secondary,
+    "success":    $success,
     // "info":       $info,
     // "warning":    $warning,
     "danger":     $danger,

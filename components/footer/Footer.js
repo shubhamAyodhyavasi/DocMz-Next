@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Link from 'next/link'
 import Axios from 'axios'
 import { connect } from 'react-redux'
@@ -6,16 +6,12 @@ import { Icon } from 'react-icons-kit'
 import { location, phone} from 'react-icons-kit/icomoon/'
 import { mail } from 'react-icons-kit/ikons/mail'
 import List from '../list/list'
+import cityJson from '../../constants/US_States_and_Cities.json';
 import carriers from "../../services/extra/Carriers.json";
 import { TOP_TITLE_1, TOP_TITLE_2, TOP_TITLE_3, TOP_HEADING, BOTTOM_CONTENT, SITE_LINKS, BOTTOM_TITLE_2, BOTTOM_TITLE_3, BOTTOM_CONTENT_3, ADDRESS, EMAIL, NUMBER, APP_STORE_LINK, PLAY_STORE_LINK, MID_EMAIL_VALUE, MID_EMAIL_LABEL, MID_NUMBER_LABEL, MID_NUMBER_VALUE, COPY_RIGHT_TEXT, } from '../../constants/messages/footer.js';
 
 const Footer = (props) => {
-    const [states, setStates] = useState({})
-
-    Axios("/json/US_States_and_Cities.json")
-    .then(({data})          => setStates(data))
-
-    const statesList        = Object.keys(states).slice(0, 10).map((name, i) => ({name, link: i % 2 === 0 ? "#" : null}))
+    const statesList        = Object.keys(cityJson).slice(0, 10).map((name, i) => ({name, link: i % 2 === 0 ? "#" : null}))
     const specialitiesList  = props.specialities.slice(0, 10).map(({name})   => ({name}))
     const carriersList      = carriers.carriers.slice(0, 10).map(({name})    => ({name}))
     return (
@@ -25,7 +21,7 @@ const Footer = (props) => {
                 list2={specialitiesList}
                 list3={carriersList}
             />
-            <div className="c-footer__middle-bar bg-light">
+            <div className="c-footer__middle-bar bg-secondary">
                 <div className="c-footer__middle-pill">
                     <div className="c-footer__middle-row">
                         <div className="c-footer__number-wrap">
@@ -108,7 +104,7 @@ const Footer = (props) => {
 }
 const FooterTop  = ({list1, list2, list3}) => {
     return (
-        <div className="c-footer__top-section bg-light py-5">
+        <div className="c-footer__top-section bg-secondary py-5">
             <div className="container">
                 <h4 className="pb-5 text-dark font-weight-bold">{TOP_HEADING}</h4>
                 <div className="row">
