@@ -112,18 +112,36 @@ class RegisterInfo extends Component {
                         getFieldValue("userType") === "user" && 
                         <>
                             <div className="">
-                                <FormItem>
-                                    {
-                                        getFieldDecorator("email", {
-                                            rules: [{ required: true, message: 'Please input your username!' }],
-                                        })(
-                                            <Input
-                                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                                placeholder="Email"
-                                            />,
-                                        )
-                                    }
-                                </FormItem>
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <FormItem>
+                                            {
+                                                getFieldDecorator("email", {
+                                                    rules: [{ required: true, message: 'Please input your username!' }],
+                                                })(
+                                                    <Input
+                                                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                                        placeholder="Email"
+                                                    />,
+                                                )
+                                            }
+                                        </FormItem>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <FormItem>
+                                            {
+                                                getFieldDecorator("phone", {
+                                                    rules: [{ required: true, message: 'Please input your Phone!' }],
+                                                })(
+                                                    <Input
+                                                        prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                                        placeholder="Phone"
+                                                    />,
+                                                )
+                                            }
+                                        </FormItem>
+                                    </div>
+                                </div>
                             </div>
                             <div className="row">
                                 <div className="col-sm-6">
