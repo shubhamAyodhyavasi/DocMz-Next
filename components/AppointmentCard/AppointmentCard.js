@@ -8,8 +8,8 @@ import getDatesFromArray from '../../services/scheduler/getDatesFromArray';
 import CustomScroll from 'react-custom-scroll';
 import 'react-custom-scroll/dist/customScroll.css'
 import { getAppointments } from '../../services/api';
-// import RoundedPopup from '../../RoundedPopup/RoundedPopup';
-// import AppointmentForm from "../AppointmentForm"
+import RoundedPopup from '../RoundedPopup/RoundedPopup';
+import AppointmentForm from "./AppointmentForm"
 import Moment from 'moment';
 export default class AppointmentCard extends Component {
     constructor(props) {
@@ -31,13 +31,12 @@ export default class AppointmentCard extends Component {
 
             }, 100);
         })
-        this.onDateChange([
-            Moment(),
-            Moment().add("days", 1),
-            Moment().add("days", 2),
-            Moment().add("days", 3),
-            Moment().add("days", 4),
-        ])
+        this.onDateChange(this.props.dates)
+    }
+    componentDidUpdate(prevProps){
+        if(prevProps.dates !== this.props.dates){
+            this.onDateChange(this.props.dates)
+        }
     }
     showModal = () => {
         this.setState({
@@ -66,37 +65,42 @@ export default class AppointmentCard extends Component {
         } = doctorObj
         const limit = 5
         const date = new Date(dates[0])
+        if(typeof this.props.onDateChange === "function"){
+            this.props.onDateChange(dates)
+        }
         this.setState({
             isLoading: true,
             dates
         }, () => {
-            getAppointments({ doctor, limit, date })
-                .then(res => {
-                    if (res.data && res.data.data) {
-                        const {
-                            data
-                        } = res.data
-                        
-                        this.setState({
-                            appointments: data,
-                            isLoading: false
-                        }, ()=> {
-                            console.log({
-                                appointments: this.state.appointments
+            if(doctor){
+                getAppointments({ doctor, limit, date })
+                    .then(res => {
+                        if (res.data && res.data.data) {
+                            const {
+                                data
+                            } = res.data
+                            
+                            this.setState({
+                                appointments: data,
+                                isLoading: false
+                            }, ()=> {
+                                console.log({
+                                    appointments: this.state.appointments
+                                })
                             })
-                        })
-                    } else {
+                        } else {
+                            this.setState({
+                                isLoading: false
+                            })
+                        }
+                    })
+                    .catch(err => {
                         this.setState({
                             isLoading: false
                         })
-                    }
-                })
-                .catch(err => {
-                    this.setState({
-                        isLoading: false
+                        console.log({ err })
                     })
-                    console.log({ err })
-                })
+            }
         })
     }
     tap() {
@@ -109,12 +113,9 @@ export default class AppointmentCard extends Component {
             parentClass,
             type,
             doctor,
-            showControl
+            showControl,
+            onlyDates
         } = this.props
-        // console.clear()
-        // console.log({
-        //     props: this.props
-        // })
         const { dates, appointments, isLoading } = this.state
 
 
@@ -129,7 +130,7 @@ export default class AppointmentCard extends Component {
             })}>
                 <div className="c-card c-appointment-card__card" title={title}>
                     {showControl && <AppointmentSlider onDateChange={this.onDateChange} />}
-                    <div className="c-appointment-card__scroll-wrapper">
+                    {!onlyDates && <div className="c-appointment-card__scroll-wrapper">
                         <CustomScroll heightRelativeToParent="100%">
                             <Row type="flex" className={classNames("c-appointment-card__scroll-row", {
                                 "c-appointment-card__scroll-row--loading": isLoading
@@ -146,21 +147,28 @@ export default class AppointmentCard extends Component {
                                 {(isLoading || !doctor) && <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />}
                             </Row>
                         </CustomScroll>
-                    </div>
-                    {/* <RoundedPopup width={900} onCancel={() => this.setState({ isPopup: false })} visible={this.state.isPopup} >
+                    </div>}
+                    <RoundedPopup width={900} onCancel={() => this.setState({ isPopup: false })} visible={this.state.isPopup} >
                         <AppointmentForm />
-                    </RoundedPopup> */}
+                    </RoundedPopup>
                 </div>
             </div>
         )
     }
 }
 AppointmentCard.defaultProps = {
-    showControl: false
+    showControl: false,
+    onlyDates: false,
+    dates: [
+        Moment(),
+        Moment().add("days", 1),
+        Moment().add("days", 2),
+        Moment().add("days", 3),
+        Moment().add("days", 4),
+    ]
 };
-const Dates = ({ appointments, dates, onClick }) =>
-
-    dates.map((el, i) => {
+const Dates = ({ appointments, dates, onClick }) =>{
+    return dates.map((el, i) => {
         localStorage.setItem('manualdate', el)
         const datesArr = getDatesFromArray(appointments, el);
         return (<Col className="c-appointment-card__date-col" offset={i === 0 && 2} key={i} span={4}>
@@ -192,3 +200,4 @@ const Dates = ({ appointments, dates, onClick }) =>
             )}
         </Col>)
     })
+}

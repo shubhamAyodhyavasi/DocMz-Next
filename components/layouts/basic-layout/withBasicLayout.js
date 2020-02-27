@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Router from 'next/router'
 import {compose} from "redux";
 import { connect } from 'react-redux'
 import { PROJECT_NAME, GOOGLE_API_KEY } from '../../../constants/projectKeys'
@@ -39,12 +40,28 @@ const withBasicLayout = (PassedComponent) => {
                 PassedComponent,
                 props: this.props
             })
+            if(this.props.loggedInDoctor._id){
+                Router.push("/doctor/dashboard")
+            }
+        }
+        componentDidUpdate(prevProps){
+            if(prevProps.loggedInDoctor !== this.props.loggedInDoctor){
+                if(this.props.loggedInDoctor._id){
+                    Router.push("/doctor/dashboard")
+                }
+            }
         }
         render(){
             const {
                 children,
                 ...props
             } = this.props
+            if(!this.props.isPersist || this.props.loggedInDoctor._id){
+                return <>
+                <script src={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`} async defer></script>
+                <div/>
+                </>
+            }
             return (
                 <div className="c-layout c-layout--basic">
                     <Head>
@@ -62,7 +79,8 @@ const withBasicLayout = (PassedComponent) => {
 }
 
 const mapStateToProps = state => ({
-    specialities: state.specialities
+    specialities: state.specialities,
+    loggedInDoctor: state.loggedInDoctor,
 })
 const mapActionToProps = {
     getSpecialities

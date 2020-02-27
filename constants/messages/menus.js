@@ -53,7 +53,40 @@ export const rightMenus = [
     },
 ]
 
+export const doctorDashboardMenu = [
+    {
+        name: "Dashboard",
+        link: "/doctor/dashboard",
+    },
+    {
+        name: "Appointments",
+        link: "/doctor/dashboard/appointments",
+    },
+    {
+        name: "Patients",
+        link: "/doctor/dashboard/patients",
+    },
+    {
+        name: "Payments",
+        link: "/doctor/dashboard/payments",
+    },
+    {
+        name: "Settings",
+        link: "/doctor/dashboard/settings",
+        subMenus: [
+            {
+                name: "Availablity",
+                link: "/doctor/dashboard/settings/availablity",
+            }
+        ]
+    },
+    {
+        name: "Logout",
+        action: "logout",
+    },
+]
 export default {
     mainMenus,
-    rightMenus
+    rightMenus,
+    doctorDashboardMenu
 }

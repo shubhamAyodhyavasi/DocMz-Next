@@ -1,8 +1,10 @@
 @import './layouts/layout';
+@import './ant/ant';
 @import './header/header';
 @import './footer/footer';
 @import './list/list';
 @import './nav/nav';
+@import './dashboard-nav/dashboardNav';
 @import './banners/all';
 @import './buttons/buttons';
 @import './sliders/all';
@@ -16,4 +18,5 @@
 @import './drList/doctorInfo';
 @import './drList/drCardLong';
 @import './drList/drList';
-@import './input/input';
+@import './RoundedPopup/rounded-popup';
+// @import './input/input';

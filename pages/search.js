@@ -2,11 +2,19 @@ import withBasicLayout from '../components/layouts/basic-layout/withBasicLayout'
 import SearchBar from '../components/search/search-bar/SearchBar'
 import SearchCard from '../components/search-card/SearchCard'
 import { getDoctorsList } from '../services/api'
+import Moment from 'moment';
 class search extends React.Component {
     constructor(){
         super()
         this.state = {
-            doctors: []
+            doctors: [],
+            dates: [
+                Moment(),
+                Moment().add("days", 1),
+                Moment().add("days", 2),
+                Moment().add("days", 3),
+                Moment().add("days", 4),
+            ]
         }
     }
     componentDidMount(){
@@ -17,6 +25,7 @@ class search extends React.Component {
             })
         })
     }
+    onDateChange = dates => this.setState({dates})
     render() {
         const { doctors } = this.state
         console.log({
@@ -25,18 +34,11 @@ class search extends React.Component {
         return (
             <div className="c-search">
                 <SearchBar />
-                <br />
-                <a href="whatsapp://send?phone=+917874855778&text=safdsdf">
-                whatsapp
-                </a>
-                <br />
-                <a href="https://api.whatsapp.com/send?phone=+917874855778&text=safdsdf">
-                whatsapp desktop
-                </a>
-                <div className="container">
+                <div className="container" >
                     <div className="p-5"></div>
+                    <SearchCard showControl={true} dates={this.state.dates} onDateChange={this.onDateChange} onlyDates={true} doctor={{}} />
                     {
-                        doctors.map((doctor, i) => <SearchCard key={i} doctor={doctor} />)
+                        doctors.map((doctor, i) => <SearchCard key={i} dates={this.state.dates} doctor={doctor} />)
                     }
                     <div className="p-5"></div>
                 </div>

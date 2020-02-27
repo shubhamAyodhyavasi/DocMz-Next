@@ -5,6 +5,7 @@ import Link from 'next/link';
 import RegisterInfo from '../components/Register/RegisterInfo';
 import RegisterVerify from '../components/Register/RegisterVerify';
 import RegisterUpload from '../components/Register/RegisterUpload';
+import onlyGuest from '../components/onlyGuest/onlyGuest';
 
 const { Step } = Steps;
 
@@ -12,7 +13,7 @@ class register extends Component {
     constructor(){
         super();
         this.state = {
-            current: 2,
+            current: 0,
             infoForm: {
                 userType: "doctor"
             },
@@ -67,7 +68,7 @@ class register extends Component {
                 title: "Thanks for Joining us",
                 subTitle: "Consectetur aipisicing elit sed dotem eiusmod tempor incune utnaem labore etdolore maigna aliqua enim poskina",
                 content: infoForm.userType === "doctor" ? <div className="p-5 text-center">
-                    <Link href="/doctors/dashboard">
+                    <Link href="/doctor/dashboard">
                         <a className="btn btn-primary">
                             Go to your Dashboard
                         </a>
@@ -107,4 +108,4 @@ class register extends Component {
     }
 }
 
-export default withBasicLayout(register)
+export default onlyGuest()(withBasicLayout(register))

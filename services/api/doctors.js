@@ -9,5 +9,6 @@ export const getDoctorByNpi         = npi  => Axios.get (apiList.getDoctorByNpi 
 export const registerDoctor         = body => Axios.post(apiList.registerDoctor, body)
 export const doctorLogin            = body => Axios.post(apiList.doctorLogin, body)
 export const doctorProfileUpdate    = body => Axios.post(apiList.doctorProfileUpdate, body)
+export const saveTimeSlots          = body => Axios.post(apiList.saveTimeSlots, body)
 
 export const getAppointments        = ({limit, doctor, date})  => Axios.post(apiList.getAppointments, {limit, doctor, date})

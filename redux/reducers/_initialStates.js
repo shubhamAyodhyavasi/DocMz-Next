@@ -6,8 +6,16 @@ export const referrer = {
     referralUrlId: null
 };
 export const specialities = [];
+export const dashboard = {
+    collapsed: false
+}
+export const doctorLoggedIn = {}
+export const patientLoggedIn = {}
 export default {
     user,
     referrer,
-    specialities
+    specialities,
+    doctorLoggedIn,
+    patientLoggedIn,
+    dashboard
 }

@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Router from 'next/router'
 import Link from 'next/link'
 import { Form, Icon, Input, Select, Radio, DatePicker, Upload, Button, Spin } from 'antd';
 import withBasicLayout from '../components/layouts/basic-layout/withBasicLayout'
+
 import rules from '../services/validations/rules';
 import Loader from '../components/loader/Loader';
 import ErrorAlert from '../components/error/ErrorAlert';
-import { doctorLogin } from '../services/api';
+import { doctorLogin, patientLogin } from '../services/api';
+import { setLoggedInDoctor, setLoggedInPatient } from '../redux/actions';
+import onlyGuest from '../components/onlyGuest/onlyGuest';
 
 const {
     Item : FormItem
@@ -16,7 +20,20 @@ class login extends Component {
     constructor(){
         super();
         this.state = {
-            isLoading: false
+            isLoading: false,
+            userType: "Patient",
+        }
+    }
+    componentDidMount(){
+        if(this.props.loggedInDoctor._id){
+            Router.push("/doctor/dashboard")
+        }
+    }
+    componentDidUpdate(prevProps){
+        if(prevProps.loggedInDoctor !== this.props.loggedInDoctor){
+            if(this.props.loggedInDoctor._id){
+                Router.push("/doctor/dashboard")
+            }
         }
     }
     handleSubmit = (e)=> {
@@ -24,20 +41,27 @@ class login extends Component {
         const {
             form: {
                 validateFields,
-            }, onSubmit,
+            }, onSubmit, setLoggedInDoctor, setLoggedInPatient
         } = this.props
         validateFields((err, values)=> {
             if (!err) {
                 this.setState({
                     isLoading: true
                 }, ()=> {
-                    doctorLogin(values)
-                    .then(({data}) => {
+                    const loginApi = this.state.userType === "Doctor" ? doctorLogin : patientLogin
+                    loginApi(values).then(({data}) => {
                         if(data.status){
                             this.setState({
                                 isLoading: false
                             })
-                            Router.push("/")
+                            console.log({
+                                data
+                            })
+                            if(this.state.userType === "Doctor"){
+                                setLoggedInDoctor(data.user)
+                            }else{
+                                setLoggedInPatient(data.user)
+                            }
                         }else{
                             this.setState({
                                 isLoading: false,
@@ -50,15 +74,71 @@ class login extends Component {
                             errMsg: "Something went wrong"
                         })
                     })
+                    // if(this.state.userType === "Doctor"){
+                    //     doctorLogin(values)
+                    //     .then(({data}) => {
+                    //         if(data.status){
+                    //             this.setState({
+                    //                 isLoading: false
+                    //             })
+                    //             console.log({
+                    //                 data
+                    //             })
+                    //             setLoggedInDoctor(data.user)
+                    //             // Router.push("/")
+                    //         }else{
+                    //             this.setState({
+                    //                 isLoading: false,
+                    //                 errMsg: data.message || data.error
+                    //             })
+                    //         }
+                    //     }).catch(err => {
+                    //         this.setState({
+                    //             isLoading: false,
+                    //             errMsg: "Something went wrong"
+                    //         })
+                    //     })
+                    // }else{
+                        
+                    //     patientLogin(values)
+                    //     .then(({data}) => {
+                    //         if(data.status){
+                    //             this.setState({
+                    //                 isLoading: false
+                    //             })
+                    //             console.log({
+                    //                 data
+                    //             })
+                    //             setLoggedInDoctor(data.user)
+                    //             // Router.push("/")
+                    //         }else{
+                    //             this.setState({
+                    //                 isLoading: false,
+                    //                 errMsg: data.message || data.error
+                    //             })
+                    //         }
+                    //     }).catch(err => {
+                    //         this.setState({
+                    //             isLoading: false,
+                    //             errMsg: "Something went wrong"
+                    //         })
+                    //     })
+                    // }
                 })
             }
         })
     }
     render() {
+        const {
+            isPersist, 
+        } = this.props
         const { getFieldDecorator, getFieldsError, getFieldError, getFieldValue } = this.props.form;
         const {
-            isLoading, errMsg
+            isLoading, errMsg, userType
         } = this.state
+        if(!isPersist){
+            return <div />
+        }
         return (
             <div className="p-login">
                 <div className="container">
@@ -75,11 +155,22 @@ class login extends Component {
                         >
                             {/* <img src="" alt="" className="img-fluid"/> */}
                         </div>
-                        <div className="col-xl-4 col-lg-6 d-flex align-items-center justify-content-center">
-                            <div className="p-login__form-wrapper p-lg-5 p-3 bg-light">
+                        <div className="col-xl-4 col-lg-6 d-flex justify-content-center pb-5">
+                            <div className="p-login__form-wrapper p-lg-5 p-3">
                                 <Form onSubmit={this.handleSubmit}>
                                     <div className="pb-3">
-                                        <h5>Login</h5>
+                                        <h5>Login as a {userType}</h5>
+                                    </div>
+                                    <div className="pb-3">
+                                        <Radio.Group value={userType} onChange={e => {
+                                            const {
+                                                value
+                                            } = e.target
+                                            this.setState({userType: value})
+                                        }} >
+                                            <Radio value={"Doctor"}>Doctor</Radio>
+                                            <Radio value={"Patient"}>Patient</Radio>
+                                        </Radio.Group>
                                     </div>
                                     <div className="">
                                         <FormItem>
@@ -114,7 +205,7 @@ class login extends Component {
                                     <Loader isLoading={isLoading} />
                                     <ErrorAlert error={errMsg} />
                                     <div className="text-center d-block">
-                                        <button disabled={isLoading} className="btn btn-primary" type="submit">Login</button>
+                                        <button disabled={isLoading} className="btn btn-primary btn-block" type="submit">Login</button>
                                     </div>
                                     <hr />
                                     <div className="text-center">
@@ -132,8 +223,17 @@ class login extends Component {
         )
     }
 }
-export default withBasicLayout(
-    Form.create({
+const mapStateToProps = state => ({
+    loggedInDoctor: state.loggedInDoctor,
+    loggedInPatient: state.loggedInPatient,
+})
+const mapActionToProps = {
+    setLoggedInDoctor,
+    setLoggedInPatient
+}
+const loginForm = Form.create({
         name: 'login'
-    })(login)
-)
+    })(connect(mapStateToProps, mapActionToProps)(login))
+
+    
+export default onlyGuest()(withBasicLayout(loginForm))
