@@ -149,7 +149,7 @@ export default class AppointmentCard extends Component {
                         </CustomScroll>
                     </div>}
                     <RoundedPopup width={900} onCancel={() => this.setState({ isPopup: false })} visible={this.state.isPopup} >
-                        <AppointmentForm />
+                        <AppointmentForm doctorId={this.props.doctor?._id} />
                     </RoundedPopup>
                 </div>
             </div>

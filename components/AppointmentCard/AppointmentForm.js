@@ -46,7 +46,7 @@ function onRadioChange(e) {
 
 // class AppointmentForm extends React.Component{ 
 //   render () {
-function AppointmentForm({userDetails}) {
+function AppointmentForm({userDetails, ...formProps}) {
   const FormOne = Form.create({ name: "appointment_form_one" })(FormStep1);
   const FormTwo = Form.create({ name: "appointment_form_two" })(FormStep2);
   const FormThree = Form.create({ name: "appointment_form_three" })(
@@ -396,6 +396,7 @@ function AppointmentForm({userDetails}) {
             <Row type="flex">
               <Col span={24}>
                 <FormThree
+                  doctorId={formProps.doctorId}
                   firstFormData={firstStapForm}
                   cardDetails={cardDetails}
                   selectedCard={selectedCard}
