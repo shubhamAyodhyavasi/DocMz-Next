@@ -7,13 +7,24 @@ import { PROJECT_NAME, GOOGLE_API_KEY } from '../../../constants/projectKeys'
 import '../../../style/app.scss'
 import { getSpecialities, toggleDashboardCollapse } from '../../../redux/actions'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Row, Col, Button, Card, Avatar, Spin, Tooltip, Popconfirm, message } from "antd";
 import { doctorDashboardMenu } from '../../../constants/messages/menus';
 import DashboardNav from '../../dashboard-nav/DashboardNav';
+import TimelineDrover from '../../timeline/TimelineDrover';
+import { getDoctorById } from '../../../services/api';
 
 const { Header: AntHeader, Content, Footer: AntFooter, Sider } = Layout;
 const { SubMenu } = Menu;
 const withDashboardLayout = (PassedComponent) => {
     return class extends React.Component {
+        constructor(){
+            super();
+            this.state = {
+                visible: true,
+                filterappointmentarr: [],
+                allAppointments: [],
+            }
+        }
         static getInitialProps = async ctx => {
             // const response = await ctx.apolloClient.query({ query: ME });
             
@@ -38,8 +49,27 @@ const withDashboardLayout = (PassedComponent) => {
         }
         componentDidMount(){
             this.props.getSpecialities();
-            if(this.props.loggedInDoctor._id){
-
+            const doctorId = this.props.loggedInDoctor._id;
+            if(doctorId){
+                getDoctorById(doctorId)
+                .then(response => {
+                  console.log('docdetailsashbaord', response.data.data.appointments);
+          
+                  let apparr = response.data.data.appointments
+                  let filterapparr = apparr.filter(function (hero) {
+                    return hero.booked === true;
+                    // console.log('hero',hero.booked == true)
+                  });
+                  console.log('filterapparrrdata', apparr)
+                  this.setState({
+                    filterappointmentarr: filterapparr,
+                    allAppointments: apparr
+                  })
+                  console.log('allApp', this.state.filterappointmentarr)
+                })
+                .catch(e => {
+                  console.log('error', e);
+                });
             }else{
                 Router.push("/login")
             }
@@ -58,6 +88,18 @@ const withDashboardLayout = (PassedComponent) => {
                 }
             }
         }
+        showDrawer = () => {
+            this.setState({
+              visible: true
+            });
+        };
+        onClose = () => {
+            if (this.state.visible) {
+              this.setState({
+                visible: false
+              });
+            }
+        };
         render(){
             const {
                 children,
@@ -71,6 +113,9 @@ const withDashboardLayout = (PassedComponent) => {
             if(!this.props.loggedInDoctor._id){
                 return <div />
             }
+            const {
+                visible, filterappointmentarr, allAppointments
+            } = this.state
             return (
                 <div className="c-layout c-layout--dashboard">
                     <Head>
@@ -91,6 +136,24 @@ const withDashboardLayout = (PassedComponent) => {
                         </Sider>
                         <Layout>
                             <PassedComponent {...props} >{children}</PassedComponent>
+                            <TimelineDrover />
+                            <div
+                                style={{
+                                    paddingLeft: 50
+                                }}
+                                >
+                                <Button onClick={this.showDrawer} className="fr timeline-toggle" type="primary">
+                                    <Icon style={{ fontSize: 20 }} type="schedule" />
+                                </Button>
+                                <TimelineDrover visible={visible}
+                                    onClose={() => {
+                                        this.onClose();
+                                    }}
+                                    class="stop-2"
+                                    allAppointments={allAppointments}
+                                    appointments={filterappointmentarr}
+                                />
+                            </div>
                         </Layout>
                     </Layout>
                 </div>

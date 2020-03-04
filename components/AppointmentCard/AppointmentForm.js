@@ -18,7 +18,7 @@ import { patientCardList } from "../../services/api/patient";
 import PaymentCard from "../../components/payment/PaymentCard";
 import AppointmentPayReview from "./AppointmentPayReview";
 import AppointmentDoctor from "./AppointmentDoctor";
-import './newappointmentap.css'
+import './newappointmentap.scss'
 import AppointmentShowCard from "./AppointmentShowCard";
 const stepStyle = {
   marginBottom: 37,
@@ -191,19 +191,19 @@ function AppointmentForm({userDetails, ...formProps}) {
           style={stepStyle}
         >
           <Step
-            status={currentStep < 1 ? "finish" : "process"}
+            // status={currentStep < 1 ? "finish" : "process"}
             title="Details"
           />
           <Step
-            status={currentStep < 2 ? "finish" : "process"}
+            // status={currentStep < 2 ? "finish" : "process"}
             title="Visit Type"
           />
           <Step
-            status={currentStep < 3 ? "finish" : "process"}
+            // status={currentStep < 3 ? "finish" : "process"}
             title="Payment"
           />
           <Step
-            status={currentStep < 4 ? "finish" : "process"}
+            // status={currentStep < 4 ? "finish" : "process"}
             title="Review and Pay"
           />
 
@@ -229,9 +229,9 @@ function AppointmentForm({userDetails, ...formProps}) {
                 <div className="c-appointment-form__step custom-ap-details-form-label">
                   <FormOne ref={formOne} />
                 </div>
-                <Button
+                <button
                   type="primary"
-                  className="ap-appointment-details-btn"
+                  className="ap-appointment-details-btn  btn btn-primary"
                   onClick={() => {
                     if (typeof formOne.current.submit === "function") {
                       formOne.current.submit(handleSubmit);
@@ -239,7 +239,7 @@ function AppointmentForm({userDetails, ...formProps}) {
                   }}
                 >
                   Next
-              </Button>
+              </button>
               </div>
             </Col>
             <Col span={12}>
@@ -254,14 +254,14 @@ function AppointmentForm({userDetails, ...formProps}) {
         <div>
           <FormStep2 />
 
-          <Button
+          <button
             type="primary"
-            className="ap-appointment-details-btn"
+            className="ap-appointment-details-btn  btn btn-primary"
             onClick={(e) => phonesubmit(e)}
 
           >
             Next
-   </Button>
+   </button>
         </div>
       )}
       {currentStep === 2 && (

@@ -6,7 +6,7 @@ class FormStep2 extends Component {
   constructor() {
     super();
     this.state = {
-      value: "",
+      value: "phone",
       phone: ""
     };
   }

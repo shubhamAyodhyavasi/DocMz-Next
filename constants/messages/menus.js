@@ -13,12 +13,21 @@ export const mainMenus = [
     },
     {
         name: "Join",
-        link: "/register"
+        link: "/register",
+        condition: "only-guest",
     },
     {
         name: "Login",
         link: "/login",
         extraClass: "has-btn",
+        extraLinkClass: "btn btn-outline-primary",
+        condition: "only-guest",
+    },
+    {
+        name: "Logout",
+        action: "logout",
+        extraClass: "has-btn",
+        condition: "only-login",
         extraLinkClass: "btn btn-outline-primary",
     },
 ]

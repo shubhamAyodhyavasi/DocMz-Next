@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
  import { Avatar } from "antd";
- import './newappointmentap.css';
+ import './newappointmentap.scss';
  import { getDoctors } from '../../redux/actions';
 import { getName, getAddress } from '../../services/extra/DoctorHelpers';
 import { connect } from 'react-redux'

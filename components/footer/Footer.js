@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Icon } from 'react-icons-kit'
 import { location, phone} from 'react-icons-kit/icomoon/'
 import { mail } from 'react-icons-kit/ikons/mail'
-import List from '../list/list'
+import List from '../list/List'
 import cityJson from '../../constants/US_States_and_Cities.json';
 import carriers from "../../services/extra/Carriers.json";
 import { TOP_TITLE_1, TOP_TITLE_2, TOP_TITLE_3, TOP_HEADING, BOTTOM_CONTENT, SITE_LINKS, BOTTOM_TITLE_2, BOTTOM_TITLE_3, BOTTOM_CONTENT_3, ADDRESS, EMAIL, NUMBER, APP_STORE_LINK, PLAY_STORE_LINK, MID_EMAIL_VALUE, MID_EMAIL_LABEL, MID_NUMBER_LABEL, MID_NUMBER_VALUE, COPY_RIGHT_TEXT, } from '../../constants/messages/footer.js';

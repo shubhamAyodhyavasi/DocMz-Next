@@ -208,13 +208,13 @@ class AppointmentPayReview extends React.Component {
     if (this.state.informedconsent && this.state.privacypolicy) {
       confirmbtn = (
         <div>
-          <Button
+          <button
             type="primary"
-            className="ap-appointment-details-btn"
+            className="ap-appointment-details-btn  btn btn-primary"
             onClick={e => this.handleSubmit(e)}
           >
             Confirm
-          </Button>
+          </button>
         </div>
       );
     } else {
@@ -339,18 +339,18 @@ class AppointmentPayReview extends React.Component {
               </Col>
 
               <Col span={24}>
-                <center>
+                <div className="pt-3 ">
                   {/* <Button type="primary">Primary</Button> */}
                   {/* {confirmbtn} */}
                   <div>
-                    <Button
+                    <button
                       type="primary"
                       disabled={
                         !(
                           this.state.informedconsent && this.state.privacypolicy
                         )
                       }
-                      className="ap-appointment-details-btn"
+                      className="ap-appointment-details-btn btn btn-primary"
                       onClick={e => {
                         if (
                           this.state.informedconsent &&
@@ -361,9 +361,9 @@ class AppointmentPayReview extends React.Component {
                       }}
                     >
                       Confirm
-                    </Button>
+                    </button>
                   </div>
-                </center>
+                </div>
               </Col>
             </div>
           </Row>

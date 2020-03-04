@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './newappointmentap.css';
+import './newappointmentap.scss';
 class Firstmodel extends Component {
     render() {
         return (
