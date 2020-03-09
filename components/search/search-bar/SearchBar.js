@@ -16,7 +16,7 @@ class SearchBar extends Component {
             isFilterOpen
         } = this.state
         return (
-            <Affix offsetTop={0}>
+            // <Affix offsetTop={0}>
                 <div className="c-search-bar bg-dark">
                     <div className="container p-3">
                         <div className="row">
@@ -43,7 +43,7 @@ class SearchBar extends Component {
                         
                     </div>
                 </div>
-            </Affix>
+            // </Affix>
         )
     }
 }

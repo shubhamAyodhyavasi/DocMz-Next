@@ -244,7 +244,7 @@ function AppointmentForm({userDetails, ...formProps}) {
             </Col>
             <Col span={12}>
               <div className="c-appointment-form__doctor-wrapper">
-                <AppointmentDoctor doctor={{ name: "doctor name" }} time="1040 - 1240" />
+                <AppointmentDoctor doctor={formProps.doctor} time="1040 - 1240" />
               </div>
             </Col>
           </Row>
@@ -411,7 +411,8 @@ function AppointmentForm({userDetails, ...formProps}) {
 }
 
 const mapStateToProps = state => ({
-  userDetails: state.loggedInPatient
+  userDetails: state.loggedInPatient,
+  appointmentTime: state.appointment.time,
 })
 
 export default connect(mapStateToProps)(AppointmentForm)

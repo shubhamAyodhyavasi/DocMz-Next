@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Router from 'next/router'
 import classNames from 'classnames'
 // import Card from '../../Card/Card'
 // import { getVersions } from '../../../services/extra/bem'
@@ -11,7 +12,9 @@ import { getAppointments } from '../../services/api';
 import RoundedPopup from '../RoundedPopup/RoundedPopup';
 import AppointmentForm from "./AppointmentForm"
 import Moment from 'moment';
-export default class AppointmentCard extends Component {
+import { setAppointmentTime } from '../../redux/actions';
+import { connect } from 'react-redux';
+class AppointmentCard extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -114,7 +117,8 @@ export default class AppointmentCard extends Component {
             type,
             doctor,
             showControl,
-            onlyDates
+            onlyDates,
+            loggedInPatient
         } = this.props
         const { dates, appointments, isLoading } = this.state
 
@@ -135,21 +139,26 @@ export default class AppointmentCard extends Component {
                             <Row type="flex" className={classNames("c-appointment-card__scroll-row", {
                                 "c-appointment-card__scroll-row--loading": isLoading
                             })}>
-                                {!isLoading && <Dates appointments={appointments} onClick={(e, a) => {
+                                {!isLoading && <Dates appointments={appointments} onClick={(e, date) => {
                                     console.log('datedataher', {
-                                        e, a
+                                        e, a: date
                                     })
-                                    console.log('aid',a._id)
-                                    localStorage.setItem('timeslotid',a._id)
-                                    this.setState({ isPopup: true })
-                                    console.log('a obj', { e })
+                                    if(loggedInPatient._id){
+                                        this.props.setAppointmentTime(date)
+                                        console.log('aid',date._id)
+                                        localStorage.setItem('timeslotid',date._id)
+                                        this.setState({ isPopup: true })
+                                        console.log('a obj', { e })
+                                    }else{
+                                        Router.push("/login")
+                                    }
                                 }} dates={dates} />}
                                 {(isLoading || !doctor) && <Spin indicator={<Icon type="loading" style={{ fontSize: 50 }} spin />} />}
                             </Row>
                         </CustomScroll>
                     </div>}
                     <RoundedPopup width={900} onCancel={() => this.setState({ isPopup: false })} visible={this.state.isPopup} >
-                        <AppointmentForm doctorId={this.props.doctor?._id} />
+                        <AppointmentForm doctor={this.props.doctor} doctorId={this.props.doctor?._id} />
                     </RoundedPopup>
                 </div>
             </div>
@@ -167,7 +176,7 @@ AppointmentCard.defaultProps = {
         Moment().add("days", 4),
     ]
 };
-const Dates = ({ appointments, dates, onClick }) =>{
+const Dates = ({ appointments, dates, onClick}) =>{
     return dates.map((el, i) => {
         localStorage.setItem('manualdate', el)
         const datesArr = getDatesFromArray(appointments, el);
@@ -201,3 +210,11 @@ const Dates = ({ appointments, dates, onClick }) =>{
         </Col>)
     })
 }
+
+const mapStateToProps = state => ({
+    loggedInPatient: state.loggedInPatient
+})
+const mapDispatchToProps = ({
+    setAppointmentTime
+})
+export default connect(mapStateToProps, mapDispatchToProps)(AppointmentCard)

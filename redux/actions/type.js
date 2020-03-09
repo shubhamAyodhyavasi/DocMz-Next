@@ -22,3 +22,6 @@ export const UNSET_LOGGEDIN_DOCTOR       = "UNSET_LOGGEDIN_DOCTOR"
 // logged in patient
 export const SET_LOGGEDIN_PATIENT         = "SET_LOGGEDIN_PATIENT"
 export const UNSET_LOGGEDIN_PATIENT       = "UNSET_LOGGEDIN_PATIENT"
+
+// appointment
+export const SET_APPOINTMENT_TIME         = "SET_APPOINTMENT_TIME"

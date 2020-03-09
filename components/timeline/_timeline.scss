@@ -53,4 +53,29 @@
             }
         }
     }
+    &__tgl-wrapper {
+        position: absolute;
+        left: -30px;
+        background: white;
+        width: 30px;
+        height: 40px;
+        box-shadow: -6px 0px 8px rgba(0, 0, 0, .05);
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        .anticon{
+            display: block;
+        }
+    }
+}
+.custom-timeline-drover-style-aakash.ant-drawer{
+    .ant-drawer-wrapper-body{
+        overflow: auto visible;
+    }
+    .ant-drawer-content{
+        overflow: visible !important;
+    }
 }

@@ -3,6 +3,8 @@ import SearchBar from '../components/search/search-bar/SearchBar'
 import SearchCard from '../components/search-card/SearchCard'
 import { getDoctorsList } from '../services/api'
 import Moment from 'moment';
+import classNames from 'classnames';
+import { Affix } from 'antd'
 class search extends React.Component {
     constructor(){
         super()
@@ -14,7 +16,8 @@ class search extends React.Component {
                 Moment().add("days", 2),
                 Moment().add("days", 3),
                 Moment().add("days", 4),
-            ]
+            ],
+            isFixed: false
         }
     }
     componentDidMount(){
@@ -27,16 +30,23 @@ class search extends React.Component {
     }
     onDateChange = dates => this.setState({dates})
     render() {
-        const { doctors } = this.state
+        const { doctors, isFixed } = this.state
         console.log({
             doctors
         })
         return (
             <div className="c-search">
                 <SearchBar />
-                <div className="container" >
+                <div className={classNames({
+                    "container": true,
+                    // "container-fluid": isFixed,
+                })}>
                     <div className="p-5"></div>
-                    <SearchCard showControl={true} dates={this.state.dates} onDateChange={this.onDateChange} onlyDates={true} doctor={{}} />
+                    <Affix offsetTop={0} onChange={isFixed=> this.setState({isFixed})} >
+                        <SearchCard showControl={true} dates={this.state.dates} onDateChange={this.onDateChange} onlyDates={true} doctor={{}} />
+                    </Affix>
+                </div>
+                <div className="container" >
                     {
                         doctors.map((doctor, i) => <SearchCard key={i} dates={this.state.dates} doctor={doctor} />)
                     }

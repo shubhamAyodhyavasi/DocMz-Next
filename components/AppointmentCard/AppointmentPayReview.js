@@ -46,11 +46,6 @@ class AppointmentPayReview extends React.Component {
     // today = mm + '/' + dd + '/' + yyyy;
     let today = moment(new Date()).format("MM/DD/YYYY");
     console.log("today", today);
-    console.clear();
-    console.log({
-      props: this.props
-    });
-
     this.setState({
       today: today
     });
@@ -287,7 +282,7 @@ class AppointmentPayReview extends React.Component {
                 </p>
                 <p>
                   <strong>Appointment Time : </strong>
-                  {localStorage.getItem("manualtime") || "--"}
+                  {moment(this.props.appointmentTime.bookedFor).format("HH:mm a, do MMMM")}
                 </p>
                 <p>
                   <strong>Specialty : </strong>Primary Care Doctor
@@ -410,6 +405,7 @@ class AppointmentPayReview extends React.Component {
   }
 }
 const mapStateToProps = state => ({
-  patient: state.loggedInPatient
+  patient: state.loggedInPatient,
+  appointmentTime: state.appointment.time,
 })
 export default connect(mapStateToProps)(AppointmentPayReview)

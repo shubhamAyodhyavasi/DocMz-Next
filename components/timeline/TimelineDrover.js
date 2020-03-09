@@ -5,6 +5,7 @@ import './customtimeline.css'
 // import { getDoctorDetail } from '../../../../services/api/doctors';
 import { getAppointmentsOfDate, getDoctorTimeLine } from '../../services/extra/DoctorHelpers';
 import moment from "moment";
+import {CalendarOutlined} from '@ant-design/icons'
 import './customtimeline.css'
 
 export default class TimelineDrover extends Component {
@@ -97,7 +98,6 @@ export default class TimelineDrover extends Component {
     }
     return (
       <div className="c-timeline-drover">
-        ssssss
         <Drawer
           title={title}
           // title = "Availability Timeline"
@@ -110,29 +110,41 @@ export default class TimelineDrover extends Component {
           className="custom-timeline-drover-style-aakash"
 
         >
+          <div className="d-block">
+            <div className="c-timeline-drover__tgl-wrapper" onClick={()=>{
+              if(typeof this.props.toggle === "function"){
+                this.props.toggle()
+              }
+            }}>
+              <div className="c-timeline-drover__tgl" >
+                <CalendarOutlined />
+              </div>
+            </div>
+            <ShortCalender
+              disableOld={true}
+              className="badge1"
+              data-badge="6"
+              onSelect={(selectedDate) => {
+                this.setState({
+                  appointments: getAppointmentsOfDate(appointments, selectedDate),
+                  selectedDate
+                }, () => {
+                  console.log({
+                    appointments: this.state.appointments
+                  },
+                    this.setState({ appointmentlength: this.state.appointments.length }),
+                    localStorage.setItem('appointmentlength', this.state.appointmentlength))
+                })
+              }}
+              appointments={this.props.allAppointments.filter(el => {
+                return el.booked && !(moment(el.bookedFor).isBefore(moment(), "day"))
+              }).map(el => ({bookedFor: el.bookedFor}))}
+            />
 
-          <ShortCalender
-            className="badge1"
-            data-badge="6"
-            onSelect={(selectedDate) => {
-              this.setState({
-                appointments: getAppointmentsOfDate(appointments, selectedDate),
-                selectedDate
-              }, () => {
-                console.log({
-                  appointments: this.state.appointments
-                },
-                  this.setState({ appointmentlength: this.state.appointments.length }),
-                  localStorage.setItem('appointmentlength', this.state.appointmentlength))
-              })
-            }}
-            appointments={this.props.allAppointments.filter(el => el.booked).map(el => ({bookedFor: el.bookedFor}))}
-          />
-
-          <div className="c-timeline-drover__row">
-            {appointmentData}
+            <div className="c-timeline-drover__row">
+              {appointmentData}
+            </div>
           </div>
-
         </Drawer>
       </div>
     );

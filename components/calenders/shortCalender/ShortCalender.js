@@ -65,6 +65,12 @@ export default class ShortCalender extends Component {
         <Calendar
           // className="badge1"
           // data-badge="6"
+          disabledDate={date => {
+            if(this.props.disableOld){
+              return moment(date).isBefore(moment(), "day")
+            }
+            return true
+          }}
           onChange={this.onSelect}
           fullscreen={false}
           headerRender={this.renderHeader}

@@ -73,12 +73,6 @@ const withDashboardLayout = (PassedComponent) => {
             }else{
                 Router.push("/login")
             }
-            console.clear()
-            console.log({
-                getInitialProps : PassedComponent.getInitialProps,
-                PassedComponent,
-                props: this.props
-            })
         }
         
         componentDidUpdate(prevProps){
@@ -93,6 +87,7 @@ const withDashboardLayout = (PassedComponent) => {
               visible: true
             });
         };
+        toggleDrawer = ()=> this.setState(prevState => ({visible: !prevState.visible}))
         onClose = () => {
             if (this.state.visible) {
               this.setState({
@@ -136,7 +131,7 @@ const withDashboardLayout = (PassedComponent) => {
                         </Sider>
                         <Layout>
                             <PassedComponent {...props} >{children}</PassedComponent>
-                            <TimelineDrover />
+                            {/* <TimelineDrover /> */}
                             <div
                                 style={{
                                     paddingLeft: 50
@@ -149,6 +144,7 @@ const withDashboardLayout = (PassedComponent) => {
                                     onClose={() => {
                                         this.onClose();
                                     }}
+                                    toggle={this.toggleDrawer}
                                     class="stop-2"
                                     allAppointments={allAppointments}
                                     appointments={filterappointmentarr}

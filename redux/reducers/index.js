@@ -5,6 +5,7 @@ import doctors from "./doctorsReducer";
 import dashboard from "./dashboardReducer";
 import loggedInDoctor from "./loggedInDoctorReducer";
 import loggedInPatient from "./loggedInPatientReducer";
+import appointment from "./appointmentReducer";
 
 export default {
   user,
@@ -14,4 +15,5 @@ export default {
   dashboard,
   loggedInDoctor,
   loggedInPatient,
+  appointment,
 };

@@ -4,3 +4,4 @@ export * from "./doctorsAction";
 export * from "./dashboardAction";
 export * from "./loggedInDoctorAction";
 export * from "./loggedInPatientAction";
+export * from "./appointmentAction";
