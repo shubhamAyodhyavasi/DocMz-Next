@@ -6,6 +6,7 @@ import FlicktySlider from '../components/sliders/flickty-slider/FlicktySlider'
 import SimpleSlideCard from '../components/sliders/slides/simple-slide-card/SimpleSlideCard'
 import { ReactSVG } from 'react-svg'
 import HowItworks from '../components/how-it-works/HowItworks'
+import Link from 'next/link'
 
 const Home = () => (
   <div className="c-home">
@@ -20,7 +21,9 @@ const Home = () => (
       }
       button={
         <div>
-          <span className="btn-lg btn btn-primary btn-primary-shadow d-md-inline-block d-block ">{BANNER_BTN_TEXT}</span>
+          <Link href="/search">
+          <a className="btn-lg btn btn-primary btn-primary-shadow d-md-inline-block d-block ">{BANNER_BTN_TEXT}</a>
+          </Link>
         </div>
       }
     />
@@ -55,6 +58,7 @@ const Home = () => (
             {
               SPECIALITIES_CARDS.map(speciality => <SimpleSlideCard 
                 cardClass="text-center"
+                link={speciality.link}
                 backgroundColor={speciality.color}
                 icon={<ReactSVG src={speciality.svg} />}
                 title={speciality.name}

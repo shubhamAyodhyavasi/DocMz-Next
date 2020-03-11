@@ -38,4 +38,11 @@
         font-weight: 500;
         letter-spacing: 0.05em;
     }
+    &__overlay-link {
+        position: absolute;
+        left: 23px;
+        right: 23px;
+        top: 23px;
+        bottom: 23px;
+    }
 }

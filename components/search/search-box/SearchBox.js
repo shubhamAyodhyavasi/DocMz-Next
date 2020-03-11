@@ -4,6 +4,7 @@ import { SEARCH_BOX_HEADING } from '../../../constants/messages/default'
 import { getSpecialities } from '../../../services/api';
 import AddressSearchInput from '../../address-search-input/AddressSearchInput';
 import MulitSearchInput from '../../multi-search-input/MulitSearchInput';
+import { Router } from 'next/router';
 
 class SearchBox extends Component {
     constructor(){
@@ -86,7 +87,9 @@ class SearchBox extends Component {
                                     <MulitSearchInput />
                                 </div>
                                 <div className="pl-3">
-                                    <button className="btn btn-primary">
+                                    <button onClick={()=> {
+                                        Router.push("/search")
+                                    }} className="btn btn-primary">
                                         <Icon type="right" />
                                     </button>
                                 </div>

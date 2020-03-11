@@ -36,15 +36,15 @@ export const SITE_LINKS         = [
         link: "/"
     },
     {
-        name: "About",
-        link: "/"
+        name: "How It Works",
+        link: "/how-it-works"
     },
     {
-        name: "Specialities",
-        link: "/"
+        name: "Contact",
+        link: "/contact-us"
     },
     {
         name: "Doctors",
-        link: "/"
+        link: "/search"
     },
 ]

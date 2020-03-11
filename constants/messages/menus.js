@@ -18,12 +18,12 @@ export const mainMenus = [
         link: "/"
     },
     {
-        name: "About",
-        link: "/"
+        name: "How It Works",
+        link: "/how-it-works"
     },
     {
-        name: "Service",
-        link: "/"
+        name: "Contact",
+        link: "/contact-us"
     },
     {
         name: "Join",

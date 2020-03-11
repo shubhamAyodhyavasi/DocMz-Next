@@ -37,42 +37,50 @@ export const SPECIALITIES_CARDS = [
     {
         name: "Primary Care",
         svg: "/images/specialities/primarycare-foreground.svg",
-        color: "rgba(0, 215, 250, 0.2)"
+        color: "rgba(0, 215, 250, 0.2)",
+        link: "/search"
     },
     {
         name: "Obgyn",
         svg: "/images/specialities/obgyn-foreground.svg",
-        color: "rgba(255, 159, 169, 0.2)"
+        color: "rgba(255, 159, 169, 0.2)",
+        link: "/search"
     },
     {
         name: "Dentists",
         svg: "/images/specialities/dentists-foreground.svg",
-        color: "rgba(215, 177, 255, 0.2)"
+        color: "rgba(215, 177, 255, 0.2)",
+        link: "/search"
     },
     {
         name: "Dermatology",
         svg: "/images/specialities/dermatology-foreground.svg",
-        color: "rgba(255, 100, 115, 0.2)"
+        color: "rgba(255, 100, 115, 0.2)",
+        link: "/search"
     },
     {
         name: "Psychiatrist",
         svg: "/images/specialities/therapy-foreground.svg",
-        color: "rgba(0, 230, 175, 0.2)"
+        color: "rgba(0, 230, 175, 0.2)",
+        link: "/search"
     },
     {
         name: "Eye Doctor",
         svg: "/images/specialities/optometry-foreground.svg",
-        color: "rgba(255, 240, 75, 0.2)"
+        color: "rgba(255, 240, 75, 0.2)",
+        link: "/search"
     },
     {
         name: "ENT",
         svg: "/images/specialities/ent-foreground.svg",
-        color: "rgba(0, 215, 250, 0.2)"
+        color: "rgba(0, 215, 250, 0.2)",
+        link: "/search"
     },
     {
         name: "Gastroenterologist",
         svg: "/images/specialities/gastro-foreground.svg",
-        color: "rgba(195, 130, 255, 0.2)"
+        color: "rgba(195, 130, 255, 0.2)",
+        link: "/search"
     },
 ]
 
