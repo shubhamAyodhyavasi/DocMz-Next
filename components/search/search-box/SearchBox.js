@@ -4,7 +4,7 @@ import { SEARCH_BOX_HEADING } from '../../../constants/messages/default'
 import { getSpecialities } from '../../../services/api';
 import AddressSearchInput from '../../address-search-input/AddressSearchInput';
 import MulitSearchInput from '../../multi-search-input/MulitSearchInput';
-import { Router } from 'next/router';
+import Router from 'next/router';
 
 class SearchBox extends Component {
     constructor(){
