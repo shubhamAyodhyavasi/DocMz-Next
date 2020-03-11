@@ -240,17 +240,19 @@ class AppointmentPayReview extends React.Component {
     let appointmentdataholder;
     if (this.state.appointmentbookstatus) {
       appointmentdataholder = (
-        <div className="appointment_booked_ap">
+        <div className="appointment_booked_ap align-items-center d-flex justify-content-center m-auto">
           <Row>
             <Col span={24}>
               <center>
                 <Icon type="check-circle" />
-                <h3>
+                <h5 className="text-dark">Congratulations!</h5>
+                <h4>Your Appointment Is Confirmed</h4>
+                <p>
                   {" "}
-                  Congratulations, Your Appointment Has Been Booked for{" "}
+                  Your Appointment Has Been Booked for{" "}
                   <strong>{this.state.formatnewdatestate}</strong> at{" "}
                   <strong>{this.state.formattimestate}</strong>{" "}
-                </h3>
+                </p>
               </center>
             </Col>
           </Row>
@@ -258,7 +260,7 @@ class AppointmentPayReview extends React.Component {
       );
     } else {
       appointmentdataholder = (
-        <div>
+        <div className="d-flex flex-column h-100">
           <Row>
             <Col span={12}>
               <h2>Appointment Details</h2>
@@ -306,7 +308,7 @@ class AppointmentPayReview extends React.Component {
             </Col>
           </Row>
           <Divider />
-          <Row>
+          <Row className="mt-auto">
             <div className="review-custom-section-ap__checkbox-ap">
               <Col span={24}>
                 <Checkbox

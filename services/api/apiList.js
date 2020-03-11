@@ -18,6 +18,7 @@ const patientCardTestDetails    =  `${BASE_URL}/stripe/testcard`
 const patientCardList           =  `${BASE_URL}/stripe/list`
 
 const getAppointments           = `${BASE_URL}/appointment/get`
+const approveAppointments       = `${BASE_URL}/appointment/approve`
 
 export default {
     getSpecialities,
@@ -37,4 +38,5 @@ export default {
     patientCardList,
 
     getAppointments,
+    approveAppointments,
 }

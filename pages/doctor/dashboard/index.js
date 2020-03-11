@@ -9,7 +9,7 @@ import { ReactSVG } from 'react-svg'
 import Highlighter from 'react-highlight-words';
 import { SearchOutlined, EyeOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
-import { getDoctorById } from "../../../services/api";
+import { getDoctorById, approveAppointments } from "../../../services/api";
 const data = [
     {
       key: '1',
@@ -44,7 +44,8 @@ class dashboard extends Component {
     this.state = {
       todaysAppointments: [],
       totalAppointments: [],
-      showAppointment: "today"
+      showAppointment: "today",
+      isLoading: false
     };
   }
   componentDidMount() {
@@ -61,20 +62,8 @@ class dashboard extends Component {
           appointment =>
             !moment(appointment.bookedFor).isBefore(moment(), "day")
         );
-        const totalAppData = totalAppointments.map((appointment, key) => ({
-            key,
-            name: appointment.patient?.email,
-            date: moment(appointment.bookedFor).format("hh:mm a, Do MMM"),
-            paid: appointment.number,
-            _id: appointment._id,
-        }))
-        const todayAppData = todaysAppointments.map((appointment, key) => ({
-            key,
-            name: appointment.patient?.email,
-            date: moment(appointment.bookedFor).format("hh:mm a, Do MMM"),
-            paid: appointment.number,
-            _id: appointment._id,
-        }))
+        const totalAppData = totalAppointments.map(this.parseAppointment)
+        const todayAppData = todaysAppointments.map(this.parseAppointment)
         this.setState({
           todaysAppointments,
           totalAppointments,
@@ -149,7 +138,14 @@ class dashboard extends Component {
         text
       )
   });
-
+  parseAppointment = (appointment, key) => ({
+    appointment,
+    key,
+    name: appointment.patient?.email,
+    date: moment(appointment.bookedFor).format("hh:mm a, Do MMM"),
+    paid: appointment.number,
+    _id: appointment._id,
+  })
   handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
     this.setState({
@@ -168,6 +164,47 @@ class dashboard extends Component {
     } = evt.target
     this.setState({
       showAppointment
+    })
+  }
+  approveAppointments = evt => {
+    const {
+      value
+    } = evt.target
+    const appointment = this.state.totalAppointments.find(appointment => appointment._id === value)
+    console.clear()
+    console.log({
+      appointment,
+    })
+    const approvetime = new Date()
+    this.setState({
+      isLoading: true
+    }, ()=> {
+      approveAppointments({
+        appointment,
+        patient: appointment.patient._id,
+        time: approvetime.toLocaleTimeString('en-US'),
+        date: moment(approvetime).format('L'),
+        address: 'NO DATA',
+        timeSlot: appointment._id,
+        email: appointment.patient.email,
+        doctor: appointment.doctor
+      })
+      .then(res => {
+        console.log({
+          res
+        })
+        this.setState({
+          isLoading: false
+        })
+      })
+      .catch(err=> {
+        console.log({
+          err
+        })
+        this.setState({
+          isLoading: false
+        })
+      })
     })
   }
   render() {
@@ -206,7 +243,7 @@ class dashboard extends Component {
             return <>
             {/* <div class="btn-group" role="group" aria-label="Basic example"> */}
                 <button type="button" class="btn btn-sm btn-primary-cus d-inline-flex align-items-center mr-2"> <EyeOutlined className="mr-1" /> View</button>
-                <button type="button" class="btn btn-sm btn-success-cus d-inline-flex align-items-center mr-2"><CheckOutlined className="mr-1" /> Approve</button>
+                <button type="button" onClick={this.approveAppointments} value={record._id} class="btn btn-sm btn-success-cus d-inline-flex align-items-center mr-2"><CheckOutlined className="mr-1" /> Approve</button>
                 <button type="button" class="btn btn-sm btn-danger-cus d-inline-flex align-items-center"><CloseOutlined className="mr-1" /> Reject</button>
             {/* </div> */}
 

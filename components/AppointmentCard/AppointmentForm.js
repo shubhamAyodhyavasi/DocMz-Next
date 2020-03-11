@@ -215,23 +215,23 @@ function AppointmentForm({userDetails, ...formProps}) {
         <Divider />
       </div> */}
       {currentStep === 0 && (
-        <div>
-          <Row>
+        <div className="d-flex flex-column align-items-start flex-grow-1" >
+          <Row className="w-100" >
             <Col span={24}>
               <p className="below-para-steps-custom-ap">We just need a few details to make your appointment smooth</p>
               <Divider />
             </Col>
           </Row>
-          <Row type="flex">
+          <Row type="flex" className="flex-grow-1 w-100" >
 
             <Col span={12}>
-              <div className="c-appointment-form__steps">
-                <div className="c-appointment-form__step custom-ap-details-form-label">
+              <div className="c-appointment-form__steps d-flex flex-column h-100 align-items-start">
+                <div className="c-appointment-form__step custom-ap-details-form-label w-100">
                   <FormOne ref={formOne} />
                 </div>
                 <button
                   type="primary"
-                  className="ap-appointment-details-btn  btn btn-primary"
+                  className="ap-appointment-details-btn  btn btn-primary mt-auto"
                   onClick={() => {
                     if (typeof formOne.current.submit === "function") {
                       formOne.current.submit(handleSubmit);
@@ -251,12 +251,12 @@ function AppointmentForm({userDetails, ...formProps}) {
         </div>
       )}
       {currentStep === 1 && (
-        <div>
+        <div className="d-flex flex-column align-items-start flex-grow-1" >
           <FormStep2 />
 
           <button
             type="primary"
-            className="ap-appointment-details-btn  btn btn-primary"
+            className="ap-appointment-details-btn  btn btn-primary mt-auto"
             onClick={(e) => phonesubmit(e)}
 
           >
@@ -391,9 +391,9 @@ function AppointmentForm({userDetails, ...formProps}) {
       }
       {
         currentStep === 3 && (
-          <div>
+          <div className="d-flex flex-grow-1">
 
-            <Row type="flex">
+            <Row type="flex" className="w-100">
               <Col span={24}>
                 <FormThree
                   doctorId={formProps.doctorId}

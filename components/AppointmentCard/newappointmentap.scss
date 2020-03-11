@@ -27,8 +27,9 @@
 
 }
 .c-appointment-form{
-  display: block;
+  display: flex;
   width: 100%;
+  flex-direction: column;
 }
 .c-appointment-form__doctor-wrapper{
   text-align: center;
@@ -251,6 +252,11 @@
   font-size: 18px;
 }
 
+.review-custom-section-ap {
+  height: 100%;
+  display: flex;
+  
+}
 .review-custom-section-ap h2 {
   /* color: #874285; */
   margin-bottom: 1rem;
@@ -445,7 +451,8 @@
 
 }
 .appointment_booked_ap .anticon {
-  font-size: 40px;
+  font-size: 120px;
+  margin-bottom: 50px;
   color: #874285;
 }
 .appointment_booked_ap h3 {

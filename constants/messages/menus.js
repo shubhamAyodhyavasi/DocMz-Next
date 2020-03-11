@@ -83,6 +83,11 @@ export const doctorDashboardMenu = [
         icon: <LayoutOutlined />,
     },
     {
+        name: "Questions",
+        link: "/doctor/dashboard/questions",
+        icon: <CalendarOutlined />,
+    },
+    {
         name: "Appointments",
         link: "/doctor/dashboard/appointments",
         icon: <CalendarOutlined />,
