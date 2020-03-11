@@ -1,11 +1,13 @@
 import withDashboardLayout from "../../../components/layouts/dashboard-layout/withDashboardLayout";
 import React, { Component } from "react";
+import classNames from 'classnames'
 import { connect } from "react-redux";
 import moment from "moment";
 import { Table, Input, Button } from 'antd';
-import Highlighter from 'react-highlight-words';
-import { SearchOutlined } from '@ant-design/icons';
+import { ReactSVG } from 'react-svg'
 
+import Highlighter from 'react-highlight-words';
+import { SearchOutlined, EyeOutlined, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 import { getDoctorById } from "../../../services/api";
 const data = [
@@ -41,7 +43,8 @@ class dashboard extends Component {
     super();
     this.state = {
       todaysAppointments: [],
-      totalAppointments: []
+      totalAppointments: [],
+      showAppointment: "today"
     };
   }
   componentDidMount() {
@@ -58,21 +61,25 @@ class dashboard extends Component {
           appointment =>
             !moment(appointment.bookedFor).isBefore(moment(), "day")
         );
-        const tatalAppData = totalAppointments.map((appointment, key) => ({
+        const totalAppData = totalAppointments.map((appointment, key) => ({
             key,
             name: appointment.patient?.email,
             date: moment(appointment.bookedFor).format("hh:mm a, Do MMM"),
             paid: appointment.number,
             _id: appointment._id,
         }))
-        console.clear();
-        console.log({
-          appointments
-        });
+        const todayAppData = todaysAppointments.map((appointment, key) => ({
+            key,
+            name: appointment.patient?.email,
+            date: moment(appointment.bookedFor).format("hh:mm a, Do MMM"),
+            paid: appointment.number,
+            _id: appointment._id,
+        }))
         this.setState({
           todaysAppointments,
           totalAppointments,
-          tatalAppData
+          totalAppData,
+          todayAppData
         });
       })
       .catch(console.log);
@@ -155,8 +162,16 @@ class dashboard extends Component {
     clearFilters();
     this.setState({ searchText: "" });
   };
+  changeShowAppointment = evt => {
+    const {
+      value: showAppointment
+    } = evt.target
+    this.setState({
+      showAppointment
+    })
+  }
   render() {
-    const { todaysAppointments, totalAppointments, tatalAppData } = this.state;
+    const { todaysAppointments, totalAppointments, totalAppData, todayAppData, showAppointment } = this.state;
     const columns = [
       {
         title: "Patient Name",
@@ -176,7 +191,7 @@ class dashboard extends Component {
         title: "Paid Amount",
         dataIndex: "paid",
         key: "paid",
-        width: "15%",
+        width: "20%",
         ...this.getColumnSearchProps("paid")
       },
       {
@@ -189,11 +204,11 @@ class dashboard extends Component {
                 text, record
             })
             return <>
-            <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="button" class="btn btn-sm btn-primary">View</button>
-                <button type="button" class="btn btn-sm btn-primary">Approve</button>
-                <button type="button" class="btn btn-sm btn-primary">Reject</button>
-            </div>
+            {/* <div class="btn-group" role="group" aria-label="Basic example"> */}
+                <button type="button" class="btn btn-sm btn-primary-cus d-inline-flex align-items-center mr-2"> <EyeOutlined className="mr-1" /> View</button>
+                <button type="button" class="btn btn-sm btn-success-cus d-inline-flex align-items-center mr-2"><CheckOutlined className="mr-1" /> Approve</button>
+                <button type="button" class="btn btn-sm btn-danger-cus d-inline-flex align-items-center"><CloseOutlined className="mr-1" /> Reject</button>
+            {/* </div> */}
 
             </>
         }
@@ -207,19 +222,47 @@ class dashboard extends Component {
           <div className="p-doc-dashboard__content">
             <div className="p-doc-dashboard__top-card-wrapper mb-3">
               <div className="p-doc-dashboard__top-card">
-                <p>Appointments today</p>
-                <h4>{todaysAppointments.length}</h4>
+                <div className="p-doc-dashboard__top-card-icon">
+                  <ReactSVG src="/images/dashboard/patient.svg" />
+                </div>
+                <div className="p-doc-dashboard__top-card-content">
+                  <h4>{todaysAppointments.length}</h4>
+                  <p>Appointments today</p>
+                </div>
               </div>
               <div className="p-doc-dashboard__top-card">
-                <p>Total Appointments</p>
-                <h4>{totalAppointments.length}</h4>
+                <div className="p-doc-dashboard__top-card-icon">
+                  <ReactSVG src="/images/dashboard/schedule.svg" />
+                </div>
+                <div className="p-doc-dashboard__top-card-content">
+                  <h4>{totalAppointments.length}</h4>
+                  <p>Total Appointments</p>
+                </div>
               </div>
               <div className="p-doc-dashboard__top-card">
-                <p>Revenue</p>
-                <h4>300</h4>
+                <div className="p-doc-dashboard__top-card-icon">
+                  <ReactSVG src="/images/dashboard/cash.svg" />
+                </div>
+                <div className="p-doc-dashboard__top-card-content">
+                  <h4>300$</h4>
+                  <p>Revenue</p>
+                </div>
               </div>
             </div>
-            <Table columns={columns} dataSource={tatalAppData} />
+            <div className="bg-white mt-3 mb-3 p-doc-dashboard__shadow">
+
+              <div className="p-doc-dashboard__table-btn-wrapper p-3">
+                <button value="today" onClick={this.changeShowAppointment} className={classNames("btn rounded-pill", {
+                  "btn-primary": showAppointment === "today",
+                  "btn-outline-primary": showAppointment !== "today"
+                })}>Today</button><span className="pl-2" />
+                <button value="upcoming" onClick={this.changeShowAppointment} className={classNames("btn rounded-pill", {
+                  "btn-primary": showAppointment !== "today",
+                  "btn-outline-primary": showAppointment === "today"
+                })}>Upcoming</button>
+              </div>
+              <Table columns={columns} dataSource={showAppointment !== "today" ? totalAppData : todayAppData} />
+            </div>
           </div>
         </div>
       </div>

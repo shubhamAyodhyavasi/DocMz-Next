@@ -123,7 +123,7 @@ export const getDoctorTimeLine = ({
   allAppointments,
   date
 }) => {
-  // console.clear()
+  console.clear()
   console.log({
     timeSlot,
     allAppointments,
@@ -139,7 +139,7 @@ export const getDoctorTimeLine = ({
   const max = moment.max(moments).format("HH")
   const min = moment.min(moments).format("HH")
   const day_start = moment().startOf('day').hours(parseInt(min))
-  const day_end = moment().startOf('day').hours(parseInt(max))
+  const day_end = moment().startOf('day').hours(parseInt(max)+1)
   const day = moment.range(day_start, day_end)
   // console.clear()
   // console.log({

@@ -1,3 +1,17 @@
+import {
+    LayoutOutlined,
+    CalendarOutlined,
+    UserOutlined,
+    CreditCardOutlined,
+    SettingOutlined,
+    FieldTimeOutlined,
+    FileOutlined,
+    StarOutlined,
+    MessageOutlined,
+    UserSwitchOutlined,
+    ShareAltOutlined,
+    LockOutlined,
+} from '@ant-design/icons'
 export const mainMenus = [
     {
         name: "Home",
@@ -66,28 +80,64 @@ export const doctorDashboardMenu = [
     {
         name: "Dashboard",
         link: "/doctor/dashboard",
+        icon: <LayoutOutlined />,
     },
     {
         name: "Appointments",
         link: "/doctor/dashboard/appointments",
+        icon: <CalendarOutlined />,
     },
     {
         name: "Patients",
         link: "/doctor/dashboard/patients",
+        icon: <UserOutlined />,
     },
     {
         name: "Payments",
         link: "/doctor/dashboard/payments",
+        icon: <CreditCardOutlined />,
     },
     {
         name: "Settings",
         link: "/doctor/dashboard/settings",
+        icon: <SettingOutlined />,
         subMenus: [
             {
                 name: "Availablity",
                 link: "/doctor/dashboard/settings/availablity",
+                icon: <FieldTimeOutlined />,
             }
         ]
+    },
+    {
+        name: "Invoices",
+        link: "/doctor/dashboard/invoices",
+        icon: <FileOutlined />,
+    },
+    {
+        name: "Reviews",
+        link: "/doctor/dashboard/reviews",
+        icon: <StarOutlined />,
+    },
+    {
+        name: "Message",
+        link: "/doctor/dashboard/message",
+        icon: <MessageOutlined />
+    },
+    {
+        name: "Profile Settings",
+        link: "/doctor/dashboard/profile-settings",
+        icon: <UserSwitchOutlined />
+    },
+    {
+        name: "Social Media",
+        link: "/doctor/dashboard/social-media",
+        icon: <ShareAltOutlined />
+    },
+    {
+        name: "Change Password",
+        link: "/doctor/dashboard/change-password",
+        icon: <LockOutlined />
     },
     {
         name: "Logout",

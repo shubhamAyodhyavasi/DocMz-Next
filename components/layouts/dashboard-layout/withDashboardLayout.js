@@ -11,6 +11,7 @@ import { Row, Col, Button, Card, Avatar, Spin, Tooltip, Popconfirm, message } fr
 import { doctorDashboardMenu } from '../../../constants/messages/menus';
 import DashboardNav from '../../dashboard-nav/DashboardNav';
 import TimelineDrover from '../../timeline/TimelineDrover';
+import LayoutDrawer from '../../layout-drawer/LayoutDrawer';
 import { getDoctorById } from '../../../services/api';
 
 const { Header: AntHeader, Content, Footer: AntFooter, Sider } = Layout;
@@ -119,7 +120,7 @@ const withDashboardLayout = (PassedComponent) => {
                     </Head>
                     <script src={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`} async defer></script>
                     <Layout style={{ minHeight: '100vh' }}>
-                        <Sider collapsible collapsed={dashboard.collapsed} onCollapse={toggleDashboardCollapse}>
+                        <Sider width={300} collapsible collapsed={dashboard.collapsed} onCollapse={toggleDashboardCollapse}>
                             <strong className="c-logo">
                                 <Link href="/" >
                                     <a>
@@ -130,9 +131,13 @@ const withDashboardLayout = (PassedComponent) => {
                             <DashboardNav items={doctorDashboardMenu} />
                         </Sider>
                         <Layout>
-                            <PassedComponent {...props} >{children}</PassedComponent>
+                            <LayoutDrawer 
+                                    allAppointments={allAppointments}
+                                    appointments={filterappointmentarr}>
+                                <PassedComponent {...props} >{children}</PassedComponent>
+                            </LayoutDrawer>
                             {/* <TimelineDrover /> */}
-                            <div
+                            {/* <div
                                 style={{
                                     paddingLeft: 50
                                 }}
@@ -149,7 +154,7 @@ const withDashboardLayout = (PassedComponent) => {
                                     allAppointments={allAppointments}
                                     appointments={filterappointmentarr}
                                 />
-                            </div>
+                            </div> */}
                         </Layout>
                     </Layout>
                 </div>

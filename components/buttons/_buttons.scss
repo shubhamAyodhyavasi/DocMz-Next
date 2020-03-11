@@ -5,3 +5,14 @@
     }
 }
   
+@each $color, $value in $theme-colors {
+    .btn-#{$color}-cus {
+        background: rgba($value, .3);
+        color: darken($color: $value, $amount: 10);
+        &:hover{
+            background: rgba($value, .4);
+            color: darken($color: $value, $amount: 10);
+        }
+    }
+}
+  

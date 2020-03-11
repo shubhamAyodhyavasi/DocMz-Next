@@ -98,7 +98,7 @@ export default class TimelineDrover extends Component {
     }
     return (
       <div className="c-timeline-drover">
-        <Drawer
+        {/* <Drawer
           title={title}
           // title = "Availability Timeline"
           placement="right"
@@ -109,9 +109,9 @@ export default class TimelineDrover extends Component {
           mask={false}
           className="custom-timeline-drover-style-aakash"
 
-        >
+        > */}
           <div className="d-block">
-            <div className="c-timeline-drover__tgl-wrapper" onClick={()=>{
+            {/* <div className="c-timeline-drover__tgl-wrapper" onClick={()=>{
               if(typeof this.props.toggle === "function"){
                 this.props.toggle()
               }
@@ -119,7 +119,7 @@ export default class TimelineDrover extends Component {
               <div className="c-timeline-drover__tgl" >
                 <CalendarOutlined />
               </div>
-            </div>
+            </div> */}
             <ShortCalender
               disableOld={true}
               className="badge1"
@@ -145,7 +145,7 @@ export default class TimelineDrover extends Component {
               {appointmentData}
             </div>
           </div>
-        </Drawer>
+        {/* </Drawer> */}
       </div>
     );
   }
