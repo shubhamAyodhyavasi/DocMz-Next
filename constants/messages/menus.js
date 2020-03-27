@@ -89,12 +89,12 @@ export const doctorDashboardMenu = [
 	},
 	{
 		name: "Appointments",
-		link: "/doctor/dashboard/appointments",
+		link: "/doctor/dashboard/Appointments/Appointments",
 		icon: <CalendarOutlined />
 	},
 	{
 		name: "Patients",
-		link: "/doctor/dashboard/patients",
+		link: "/doctor/dashboard/Patients/Patients",
 		icon: <UserOutlined />
 	},
 	{
@@ -116,7 +116,7 @@ export const doctorDashboardMenu = [
 	},
 	{
 		name: "Invoices",
-		link: "/doctor/dashboard/invoices",
+		link: "/doctor/dashboard/invoice/invoice",
 		icon: <FileOutlined />
 	},
 	{
