@@ -1,0 +1,76 @@
+.kamalesh-appiontments {
+  max-width: 800px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 10px;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.048),
+    0 6px 10px 0 rgba(0, 0, 0, 0.041);
+  border-radius: 3px;
+  background-color: #fff;
+
+  .kamalesh-profile {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    img {
+      width: 130px;
+      height: 130px;
+      margin-right: 10px;
+      border-radius: 3px;
+    }
+
+    .kamalesh-details {
+      h2 {
+        margin: 0px;
+        font-size: 16px;
+        letter-spacing: 0.02em;
+      }
+
+      div {
+        font-size: 13px;
+        margin: 2px 0px;
+        color: rgb(65, 65, 65);
+
+        &:first-child {
+          margin-right: 50px;
+        }
+      }
+    }
+  }
+
+  .kamalesh-actions {
+    .kamalesh-action-icon {
+      padding-bottom: 5px;
+    }
+
+    button {
+      border: 0px;
+      margin: 5px;
+      border-radius: 3px;
+    }
+    .kamalesh-button-green {
+      background-color: #dbf7f8;
+      color: #539f59;
+      &:hover {
+        box-shadow: 0 4px 4px 0 rgba(27, 233, 130, 0.356),
+          0 0px 5px 0 rgba(55, 250, 65, 0.185);
+      }
+    }
+    .kamalesh-button-red {
+      background-color: #fce4e3;
+      color: #d14a59;
+      &:hover {
+        box-shadow: 0 4px 8px 0 rgba(231, 165, 165, 0.336),
+          0 0px 10px 0 rgba(248, 192, 192, 0.425);
+      }
+    }
+  }
+}
+
+.kamalesh-icon {
+  margin-right: 6px;
+}
