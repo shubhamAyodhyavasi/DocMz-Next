@@ -1,99 +1,99 @@
 import Payment from 'payment'
 
 function clearNumber(value = '') {
-  return value.replace(/\D+/g, '')
+    return value.replace(/\D+/g, '')
 }
 
 export function formatCreditCardNumber(value) {
-  if (!value) {
-    return value
-  }
+    if (!value) {
+        return value
+    }
 
-  const issuer = Payment.fns.cardType(value)
+    const issuer = Payment.fns.cardType(value)
 
-  const clearValue = clearNumber(value)
-  let nextValue
+    const clearValue = clearNumber(value)
+    let nextValue
 
-  switch (issuer) {
-    case 'amex':
-      nextValue = `${clearValue.slice(0, 4)} ${clearValue.slice(
+    switch (issuer) {
+        case 'amex':
+            nextValue = `${clearValue.slice(0, 4)} ${clearValue.slice(
         4,
         10
       )} ${clearValue.slice(10, 15)}`
-      break
-    case 'dinersclub':
-      nextValue = `${clearValue.slice(0, 4)} ${clearValue.slice(
+            break
+        case 'dinersclub':
+            nextValue = `${clearValue.slice(0, 4)} ${clearValue.slice(
         4,
         10
       )} ${clearValue.slice(10, 14)}`
-      break
-    default:
-      nextValue = `${clearValue.slice(0, 4)} ${clearValue.slice(
+            break
+        default:
+            nextValue = `${clearValue.slice(0, 4)} ${clearValue.slice(
         4,
         8
       )} ${clearValue.slice(8, 12)} ${clearValue.slice(12, 19)}`
-      break
-  }
-  const retVal={
-    val:nextValue.trim(),
-    type:issuer
-  }
-  return retVal
+            break
+    }
+    const retVal = {
+        val: nextValue.trim(),
+        type: issuer
+    }
+    return retVal
 }
 
 export function formatCVC(value, prevValue, allValues = {}) {
-  const clearValue = clearNumber(value)
-  let maxLength = 4
+    const clearValue = clearNumber(value)
+    let maxLength = 4
 
-  if (allValues.number) {
-    const issuer = Payment.fns.cardType(allValues.number)
-    maxLength = issuer === 'amex' ? 4 : 3
-  }
+    if (allValues.number) {
+        const issuer = Payment.fns.cardType(allValues.number)
+        maxLength = issuer === 'amex' ? 4 : 3
+    }
 
-  return clearValue.slice(0, maxLength)
+    return clearValue.slice(0, maxLength)
 }
 
 export function formatExpirationDate(value) {
-  const clearValue = clearNumber(value)
+    const clearValue = clearNumber(value)
 
-  if (clearValue.length >= 3) {
-    return `${clearValue.slice(0, 2)}/${clearValue.slice(2, 4)}`
-  }
-  return clearValue
+    if (clearValue.length >= 3) {
+        return `${clearValue.slice(0, 2)}/${clearValue.slice(2, 4)}`
+    }
+    return clearValue
 }
 
 
 
-export function frantSvg(color="gray",cardNumber="",cardDate="",cardName=""){
-  const svgImage = `<svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
+export function frantSvg(color = "gray", cardNumber = "", cardDate = "", cardName = "") {
+    const svgImage = `<svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  x="0px" y="0px" viewBox="0 0 750 471" style="enableBackground:new 0 0 750 471;" xml:space="preserve">
   <g id="Front">
       <g id="CardBackground">
           <g id="Page-1_1_">
               <g id="amex_1_">
                   <path id="Rectangle-1_1_" class="lightcolor ` +
-color +
-`" d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
+        color +
+        `" d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
           C0,17.9,17.9,0,40,0z" />
               </g>
           </g>
           <path class="darkcolor ` +
-color +
-`dark" d="M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z" />
+        color +
+        `dark" d="M750,431V193.2c-217.6-57.5-556.4-13.5-750,24.9V431c0,22.1,17.9,40,40,40h670C732.1,471,750,453.1,750,431z" />
       </g>
       <text transform="matrix(1 0 0 1 60.106 295.0121)" id="svgnumber" class="st2 st3 st4">` +
-cardNumber +
-`</text>
+        cardNumber +
+        `</text>
       <text transform="matrix(1 0 0 1 54.1064 428.1723)" id="svgname" class="st2 st5 st6">` +
-cardName +
-`</text>
+        cardName +
+        `</text>
       <text transform="matrix(1 0 0 1 54.1074 389.8793)" class="st7 st5 st8">cardholder name</text>
       <text transform="matrix(1 0 0 1 479.7754 388.8793)" class="st7 st5 st8">expiration</text>
       <text transform="matrix(1 0 0 1 65.1054 241.5)" class="st7 st5 st8">card number</text>
       <g>
           <text transform="matrix(1 0 0 1 574.4219 433.8095)" id="svgexpire" class="st2 st5 st9">` +
-cardDate +
-`</text>
+        cardDate +
+        `</text>
           <text transform="matrix(1 0 0 1 479.3848 417.0097)" class="st2 st10 st11">VALID</text>
           <text transform="matrix(1 0 0 1 479.3848 435.6762)" class="st2 st10 st11">THRU</text>
           <polygon class="st2" points="554.5,421 540.4,414.2 540.4,427.9 		" />
@@ -135,14 +135,14 @@ cardDate +
   <g id="Back">
   </g>
 </svg>`;
-return svgImage;
+    return svgImage;
 }
 
 
-export function backSvg(color="gray",cardCV="",cardName=""){
-  const svgImage = `
+export function backSvg(color = "gray", cardCV = "", cardName = "") {
+    const svgImage = `
   <svg version="1.1" id="cardback" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-  x="0px" y="0px" viewBox="0 0 750 471" style="enable-background:new 0 0 750 471;" xml:space="preserve">
+  x="0px" y="0px" viewBox="0 0 750 471" style="enableBackground:new 0 0 750 471;" xml:space="preserve">
   <g id="Front">
       <line class="st0" x1="35.3" y1="10.4" x2="36.7" y2="11" />
   </g>
@@ -150,8 +150,8 @@ export function backSvg(color="gray",cardCV="",cardName=""){
       <g id="Page-1_2_">
           <g id="amex_2_">
               <path id="Rectangle-1_2_" class="darkcolor ` +
-color +
-`dark" d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
+        color +
+        `dark" d="M40,0h670c22.1,0,40,17.9,40,40v391c0,22.1-17.9,40-40,40H40c-22.1,0-40-17.9-40-40V40
       C0,17.9,17.9,0,40,0z" />
           </g>
       </g>
@@ -164,17 +164,17 @@ color +
           <path class="st5" d="M701.1,184.6H618h-8h-10v64.5h10h8h83.1c3.3,0,6-2.7,6-6v-52.5C707.1,187.3,704.4,184.6,701.1,184.6z" />
       </g>
       <text transform="matrix(1 0 0 1 621.999 227.2734)" id="svgsecurity" class="st6 st7">` +
-cardCV +
-`</text>
+        cardCV +
+        `</text>
       <g class="st8">
           <text transform="matrix(1 0 0 1 518.083 280.0879)" class="st9 st6 st10">security code</text>
       </g>
       <rect x="58.1" y="378.6" class="st11" width="375.5" height="13.5" />
       <rect x="58.1" y="405.6" class="st11" width="421.7" height="13.5" />
       <text transform="matrix(1 0 0 1 59.5073 228.6099)" id="svgnameback" class="st12 st13">` +
-cardName +
-`</text>
+        cardName +
+        `</text>
   </g>
 </svg>`;
-return svgImage;
+    return svgImage;
 }

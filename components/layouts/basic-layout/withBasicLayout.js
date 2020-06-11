@@ -49,13 +49,13 @@ const withBasicLayout = PassedComponent => {
 				props: this.props
 			});
 			if (this.props.loggedInDoctor._id) {
-				Router.push("/doctor/dashboard");
+				Router.push("/doctor/newdash");
 			}
 		}
 		componentDidUpdate(prevProps) {
 			if (prevProps.loggedInDoctor !== this.props.loggedInDoctor) {
 				if (this.props.loggedInDoctor._id) {
-					Router.push("/doctor/dashboard");
+					Router.push("/doctor/newdash");
 				}
 			}
 		}

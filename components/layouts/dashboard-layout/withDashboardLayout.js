@@ -9,10 +9,11 @@ import { getSpecialities, toggleDashboardCollapse } from '../../../redux/actions
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import { Row, Col, Button, Card, Avatar, Spin, Tooltip, Popconfirm, message } from "antd";
 import { doctorDashboardMenu } from '../../../constants/messages/menus';
-import DashboardNav from '../../dashboard-nav/DashboardNav';
+import SideNav from '../../SideNav/SideNav';
 import TimelineDrover from '../../timeline/TimelineDrover';
 import LayoutDrawer from '../../layout-drawer/LayoutDrawer';
 import { getDoctorById } from '../../../services/api';
+
 
 const { Header: AntHeader, Content, Footer: AntFooter, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -25,6 +26,7 @@ const withDashboardLayout = (PassedComponent) => {
                 filterappointmentarr: [],
                 allAppointments: [],
             }
+           
         }
         static getInitialProps = async ctx => {
             // const response = await ctx.apolloClient.query({ query: ME });
@@ -96,6 +98,7 @@ const withDashboardLayout = (PassedComponent) => {
               });
             }
         };
+       
         render(){
             const {
                 children,
@@ -119,8 +122,8 @@ const withDashboardLayout = (PassedComponent) => {
                         <link rel="icon" href="/favicon.png" />
                     </Head>
                     <script src={`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places`} async defer></script>
-                    <Layout style={{ minHeight: '100vh' }}>
-                        <Sider width={300} collapsible collapsed={dashboard.collapsed} onCollapse={toggleDashboardCollapse}>
+                   
+                        {/* {<Sider width={300} collapsible collapsed={dashboard.collapsed} onCollapse={toggleDashboardCollapse}>
                             <strong className="c-logo">
                                 <Link href="/" >
                                     <a>
@@ -128,14 +131,19 @@ const withDashboardLayout = (PassedComponent) => {
                                     </a>
                                 </Link>
                             </strong>
-                            <DashboardNav items={doctorDashboardMenu} />
-                        </Sider>
-                        <Layout>
-                            <LayoutDrawer 
-                                    allAppointments={allAppointments}
-                                    appointments={filterappointmentarr}>
+                            <SideNav  />
+                        </Sider>} */}
+                         <main role="main" className="main-wrapper">
+                         <div className="sidenav-wrapper">
+                            <section className="sidenav-container">
+                                <SideNav />
+                            </section>
+                        </div>
+                      
+                            
                                 <PassedComponent {...props} >{children}</PassedComponent>
-                            </LayoutDrawer>
+                            
+
                             {/* <TimelineDrover /> */}
                             {/* <div
                                 style={{
@@ -155,8 +163,9 @@ const withDashboardLayout = (PassedComponent) => {
                                     appointments={filterappointmentarr}
                                 />
                             </div> */}
-                        </Layout>
-                    </Layout>
+                       
+                    
+                </main>
                 </div>
             )
         }
@@ -170,6 +179,7 @@ const mapStateToProps = state => ({
 })
 const mapActionToProps = {
     getSpecialities,
-    toggleDashboardCollapse
+    toggleDashboardCollapse,
+   
 }
 export default compose(connect(mapStateToProps, mapActionToProps), withDashboardLayout)
