@@ -7,7 +7,8 @@ import Question  from "../assets/question";
 import Heart  from "../assets/heart";
 import Mail  from "../assets/mail";
 import Exit  from "../assets/exit";
-import Link from 'next/link'
+import Link from 'next/link';
+import Router from "next/router"
 import { unsetLoggedInDoctor } from '../../redux/actions'
 import { Button } from "antd";
 
@@ -16,7 +17,10 @@ class SideNav extends Component{
   constructor(){
     super();
    
-}
+}   
+    onClick(){
+      Router.push("/");
+    }
    logout(){
     this.props.unsetLoggedInDoctor();
   }
@@ -25,8 +29,11 @@ class SideNav extends Component{
       <>
         <div className="sidenav-main ">
           <div className="sidenav-brand mt-lg-3">
-            <div className="sidenav-brand-icon">
-              {<Cross />} 
+            <div className="sidenav-brand-icon" onClick={this.onClick.bind(this)}>
+              
+                <Cross />
+             
+              
             </div>
             <div className="sidenav-brand-info">Medi</div>
           </div>

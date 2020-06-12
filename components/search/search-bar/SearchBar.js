@@ -4,8 +4,8 @@ import { Affix } from 'antd'
 import { Collapse } from 'reactstrap'
 
 class SearchBar extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             isFilterOpen : false
         }
@@ -21,7 +21,7 @@ class SearchBar extends Component {
                     <div className="container p-3">
                         <div className="row">
                             <div className="col-lg-11">
-                                <SearchCore />
+                                <SearchCore onSearch={this.props.getSearch} />
                             </div>
                             <div className="col-lg-1">
                                 <button onClick={this.toggleFilter} className="btn btn-block btn-outline-primary">

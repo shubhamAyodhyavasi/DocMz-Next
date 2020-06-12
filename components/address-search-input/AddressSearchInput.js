@@ -13,16 +13,23 @@ export default class AddressSearchInput extends Component{
 
   handleAddressChange = (address) => {
     this.setState({ address });
+
   }
 
   componentDidUpdate(prevProps){
     if (prevProps.address !== this.props.address) {
         this.setState({ address: this.props.address });
     }
+   
   }
+ onClick =(e)=>{
+   const address = e.target.getAttribute("value");
+  this.props.onSelect(address);
+ }
   render() {
     const { address } = this.state;
-
+    console.log("address",address,this.props);
+   
     return (
       <PlacesAutocomplete onChange={this.handleAddressChange} onSelect={this.props.onAddressSelect} value={address}>
         {({ getInputProps, getSuggestionItemProps, suggestions, loading }) => (
@@ -49,7 +56,7 @@ export default class AddressSearchInput extends Component{
 
                 return (
                   <div {...spread} key={suggestion.id}>
-                    <div>{suggestion.description}</div>
+                    <div onClick={this.onClick} value={suggestion.description}>{suggestion.description}</div>
                   </div>
                 );
               })}

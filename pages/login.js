@@ -145,7 +145,7 @@ class login extends Component {
       return <div />;
     }
     return (
-      <div className="p-login">
+      <div className="p-login maincontent-wrapper">
         <div className="container">
           <div
             className="row p-login__full-row"

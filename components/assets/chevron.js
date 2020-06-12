@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-width="12px" height="12px"	 viewBox="0 0 512 512" style="enableBackground:new 0 0 512 512;" xml:space="preserve">
+import React from 'react'
+
+export const Arrow = (props) => {
+	return(
+		<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+width="12px" height="12px"	 viewBox="0 0 512 512" style={{enableBackground:"new 0 0 512 512"}} xmlSpace="preserve">
 <g>
 	<g>
 		<path d="M367.954,213.588L160.67,5.872c-7.804-7.819-20.467-7.831-28.284-0.029c-7.819,7.802-7.832,20.465-0.03,28.284
@@ -41,3 +43,8 @@ width="12px" height="12px"	 viewBox="0 0 512 512" style="enableBackground:new 0 
 <g>
 </g>
 </svg>
+
+	)
+}
+
+export default Arrow

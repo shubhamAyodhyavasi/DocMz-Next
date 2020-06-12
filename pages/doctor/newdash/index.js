@@ -1,6 +1,5 @@
 import React ,{Component} from "react";
 import withDashboardLayout from "../../../components/layouts/dashboard-layout/withDashboardLayout";
-import SideNav from "../../../components/SideNav/SideNav";
 import MyAppoinments from "../../../components/MyAppoinments/MyAppoinments";
 import  Search from "../../../components/assets/search.js";
 import  Cross  from "../../../components/assets/redCross";

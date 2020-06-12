@@ -4,11 +4,11 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { PROJECT_NAME, GOOGLE_API_KEY } from "../../../constants/projectKeys";
 import { mainMenus } from "../../../constants/messages/menus";
-import Header from "../../header/Header";
+import SideNav from '../../SideNav/SideNav';
 import "../../../style/app.scss";
 import { getSpecialities } from "../../../redux/actions";
-import Footer from "../../footer/Footer";
 
+ 
 const withBasicLayout = PassedComponent => {
 	return class extends React.Component {
 		getMenu() {
@@ -85,9 +85,15 @@ const withBasicLayout = PassedComponent => {
 						defer
 					></script>
 
-					<Header mainMenus={this.getMenu()} />
+						<main role="main" className="main-wrapper">
+                         <div className="sidenav-wrapper">
+                            <section className="sidenav-container">
+                                <SideNav />
+                            </section>
+                        </div>
 					<PassedComponent {...props}>{children}</PassedComponent>
-					<Footer />
+					
+					</main>
 				</div>
 			);
 		}
