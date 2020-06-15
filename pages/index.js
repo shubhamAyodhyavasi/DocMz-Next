@@ -64,18 +64,19 @@ const LandingPage = () => {
               
                 <Buttons name="Find A Doctor" href="/search"/>
               
-                  <FlicktySlider >
-                  <div className="cards-wrapper">
                   
+                  <div className="cards-wrapper">
+                  <FlicktySlider >
                     {
                 SPECIALITIES_CARDS.map(speciality => <Cards 
                   link={speciality.link}
                   icon=""
                   procedure={speciality.name}
                 />)
-              }      
+              } 
+               </FlicktySlider>       
               </div>
-              </FlicktySlider>  
+             
                
               </div>
               <div className="info-section-svg">
