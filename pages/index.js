@@ -17,7 +17,9 @@ import  Farrow  from "../components/assets/filledArrow";
 import Buttons from "../components/Button/Buttons";
 import Cards from "../components/Card/Cards";
 import Link from "next/link"
-
+import { BANNER_BTN_TEXT, BANNER_TEXT_1, BANNER_TEXT_2, BANNER_TEXT_3, BANNER_IMAGE, SEARCH_BOX_HEADING, SPECIALITIES_CARDS, SPECIALITIES_TEXT_1, SPECIALITIES_TEXT_2, SPECIALITIES_BTN_TEXT, HOW_IT_WORK_PRETITLE, HOW_IT_WORK_TITLE_P_1, HOW_IT_WORK_TITLE_P_2, HOW_IT_WORK_CONTENT, HOW_IT_WORK_STEPS } from '../constants/messages/home'
+import FlicktySlider from '../components/sliders/flickty-slider/FlicktySlider'
+import BlobShape from "../components/assets/blob-shapes.svg";
 const LandingPage = () => {
   const isMobile = useMediaQuery({
     query: "(max-device-width: 700px)"
@@ -26,7 +28,7 @@ const LandingPage = () => {
     <>
      
         <div className="maincontent-wrapper">
-          <div className="fixed-div">
+          <div className="fixed-div" style={{backgroundImage:`url(${BlobShape})`}}>
             <section className="searchbar-wrapper">
               <div className="searchbar-container">
                 <Search />
@@ -62,12 +64,19 @@ const LandingPage = () => {
               
                 <Buttons name="Find A Doctor" href="/search"/>
               
-                
-                <div className="cards-wrapper">
-                  <Cards procedure={"Cardio"} />
-                  <Cards procedure={"Dentistry"} />
-                  <Cards procedure={"Pulmonology"} />
-                </div>
+                  <FlicktySlider >
+                  <div className="cards-wrapper">
+                  
+                    {
+                SPECIALITIES_CARDS.map(speciality => <Cards 
+                  link={speciality.link}
+                  icon=""
+                  procedure={speciality.name}
+                />)
+              }      
+              </div>
+              </FlicktySlider>  
+               
               </div>
               <div className="info-section-svg">
                 {isMobile ? <CheckupSm /> : <Checkup />}
