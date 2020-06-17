@@ -22,6 +22,8 @@ const getAppointments = `${BASE_URL}/appointment/get`
 const approveAppointments = `${BASE_URL}/appointment/approve`
 
 
+
+
 export default {
     getSpecialities,
     getDoctorsList,
@@ -42,4 +44,5 @@ export default {
 
     getAppointments,
     approveAppointments,
+
 }
