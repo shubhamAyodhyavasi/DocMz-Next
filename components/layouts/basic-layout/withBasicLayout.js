@@ -1,14 +1,15 @@
 import Head from "next/head";
 import Router from "next/router";
+import PropTypes from 'prop-types';
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { PROJECT_NAME, GOOGLE_API_KEY } from "../../../constants/projectKeys";
 import { mainMenus } from "../../../constants/messages/menus";
-import Header from "../../header/Header";
+import SideNav from '../../SideNav/SideNav';
 import "../../../style/app.scss";
 import { getSpecialities } from "../../../redux/actions";
-import Footer from "../../footer/Footer";
 
+ 
 const withBasicLayout = PassedComponent => {
 	return class extends React.Component {
 		getMenu() {
@@ -43,24 +44,23 @@ const withBasicLayout = PassedComponent => {
 
 		componentDidMount() {
 			this.props.getSpecialities();
-			console.log({
-				getInitialProps: PassedComponent.getInitialProps,
-				PassedComponent,
-				props: this.props
-			});
+			
 			if (this.props.loggedInDoctor._id) {
-				Router.push("/doctor/dashboard");
+				Router.push("/doctor/newdash");
 			}
 		}
 		componentDidUpdate(prevProps) {
 			if (prevProps.loggedInDoctor !== this.props.loggedInDoctor) {
 				if (this.props.loggedInDoctor._id) {
-					Router.push("/doctor/dashboard");
+					Router.push("/doctor/newdash");
 				}
 			}
 		}
 		render() {
 			const { children, ...props } = this.props;
+			console.log(props);
+			
+			
 			if (!this.props.isPersist || this.props.loggedInDoctor._id) {
 				return (
 					<>
@@ -85,15 +85,24 @@ const withBasicLayout = PassedComponent => {
 						defer
 					></script>
 
-					<Header mainMenus={this.getMenu()} />
+						<main role="main" className="main-wrapper">
+                         <div className="sidenav-wrapper">
+                            <section className="sidenav-container">
+                                <SideNav />
+                            </section>
+                        </div>
 					<PassedComponent {...props}>{children}</PassedComponent>
-					<Footer />
+					
+					</main>
 				</div>
 			);
 		}
 	};
 };
-
+withBasicLayout.protoTypes ={
+	getSpecialities: PropTypes.func.isRequired,
+	specialities: PropTypes.object.isRequired
+}
 const mapStateToProps = state => ({
 	specialities: state.specialities,
 	loggedInDoctor: state.loggedInDoctor

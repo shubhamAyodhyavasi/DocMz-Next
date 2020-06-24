@@ -77,7 +77,7 @@ class register extends Component {
             },
         ]
         return (
-            <div className="p-register">
+            <div className="p-register maincontent-wrapper">
                 <div className="container">
                     <div className="row justify-content-center pb-5 p-register__full-row">
                         <div className="p-register__wrapper bg-light p-5 col-xs-12 col-sm-12 col-md-12 col-lg-8  col-xl-6 ">

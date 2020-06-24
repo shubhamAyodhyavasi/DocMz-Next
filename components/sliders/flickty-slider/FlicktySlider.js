@@ -8,7 +8,7 @@ const FlicktySlider = ({children}) => {
             if(flkty){
                 flkty.on("scroll", progress => {
                     if(!isNaN(progress)){
-                        let pos = `${progress * 80}%`;
+                        let pos = `${progress * .70}%`;
                         sliderLine.current.style.left = pos
                     }
                 });

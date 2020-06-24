@@ -23,15 +23,16 @@ class login extends Component {
   }
   componentDidMount() {
     if (this.props.loggedInDoctor._id) {
-      Router.push("/doctor/dashboard");
+      Router.push("/doctor/newdash");
     }
   }
   componentDidUpdate(prevProps) {
     if (prevProps.loggedInDoctor !== this.props.loggedInDoctor) {
       if (this.props.loggedInDoctor._id) {
-        Router.push("/doctor/dashboard");
+        Router.push("/doctor/newdash");
       }
     }
+    
   }
   handleSubmit = e => {
     e.preventDefault();
@@ -145,7 +146,7 @@ class login extends Component {
       return <div />;
     }
     return (
-      <div className="p-login">
+      <div className="p-login maincontent-wrapper">
         <div className="container">
           <div
             className="row p-login__full-row"

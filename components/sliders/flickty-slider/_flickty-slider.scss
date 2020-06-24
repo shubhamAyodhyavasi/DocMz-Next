@@ -1,7 +1,10 @@
-.c-flickty{
+.c-flickty {
     overflow: hidden;
-    &__slider, .flickity-viewport{
-        &:focus{
+    width: 100%;
+    margin-left: -40px;
+    &__slider,
+    .flickity-viewport {
+        &:focus {
             outline: none;
         }
     }
@@ -16,17 +19,16 @@
         border-radius: 50%;
         color: rgba($black, .4);
         margin-left: 10px;
-        &:hover{
+        &:hover {
             color: theme-color("primary");
             svg {
                 fill: theme-color("primary");
             }
         }
-        &:disabled{
+        &:disabled {
             color: rgba($black, .4);
             opacity: 0.4;
         }
-        
         // &.next{
         // }
         svg {
@@ -36,5 +38,32 @@
             fill: rgba($black, .6);
         }
     }
-    
+}
+
+.flickity-slider {
+    left: 40px!important;
+}
+
+.flickity-viewport {
+    height: 235px!important;
+}
+
+.flickity-prev-next-button.previous {
+    left: 38px!important;
+}
+
+.c-flickty .flickity-button:hover svg {
+    fill: #ffffff!important;
+}
+
+.flickity-button:hover {
+    background: #5b72f2!important;
+}
+
+.c-flickty .flickity-button:hover {
+    color: #5b72f2!important;
+}
+
+.flickity-prev-next-button.next {
+    right: -80%!important;
 }
